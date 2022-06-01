@@ -1,20 +1,44 @@
 package com.cleber.helpDeskapi.domain;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import com.cleber.helpDeskapi.domain.enums.Prioridade;
 import com.cleber.helpDeskapi.domain.enums.Status;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class Chamado {
+@Entity
+public class Chamado implements Serializable{
 
+
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private LocalDateTime dataAbertura;
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	private LocalDateTime dataAbertura = LocalDateTime.now();
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDateTime dataFechamento;
 	private Prioridade prioridade;
 	private Status status;
 	private String titulo;
 	private String observacoes;
+	
+	@ManyToOne
+	@JoinColumn(name = "cliente_id")
+	private Cliente cliente;
+	
+	@ManyToOne
+	@JoinColumn(name = "tecnico_id")
+	private Tecnico tecnico;
 	
 	public Chamado() {
 		super();

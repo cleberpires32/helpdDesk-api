@@ -1,21 +1,42 @@
 package com.cleber.helpDeskapi.domain;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 import com.cleber.helpDeskapi.domain.enums.Perfil;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-public abstract class Pessoa {
+@Entity
+public abstract class Pessoa implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Integer id;
 	protected String nome;
+	@Column(unique = true)
 	protected String email;
+	@Column(unique = true)
 	protected String cpf;
 	protected String senha;
+	@ElementCollection(fetch = FetchType.EAGER)//anotacion que garante ler o perfil sempre que chamar a classe Pessoa
+	@CollectionTable(name = "PERFIS" )
 	protected Set<Integer> perfis = new HashSet<>();
+	@JsonFormat(pattern = "dd/MM/yyyy") //Tras as datas do banco no formato prescrito o pattern
 	protected LocalDateTime dataCriacao = LocalDateTime.now();
 	
 	public Pessoa() {
