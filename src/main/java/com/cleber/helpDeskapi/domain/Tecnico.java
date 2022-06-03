@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
 import com.cleber.helpDeskapi.domain.enums.Perfil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Tecnico extends Pessoa {
@@ -14,6 +15,7 @@ public class Tecnico extends Pessoa {
 	private static final long serialVersionUID = 1L;
 	
 	@OneToMany(mappedBy = "tecnico")
+	@JsonIgnore //Anotetion que ignora este campo quando buscar o tecnico no db para não causar loop inifinit
 	private  List<Chamado> chamados = new ArrayList<>();
 
 	public Tecnico() {

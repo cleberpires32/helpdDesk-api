@@ -2,7 +2,7 @@ package com.cleber.helpDeskapi.domain.enums;
 
 public enum Perfil {
 
-	PESSOA(0, "ROLE_ADMIN"), CLIENTE(1, "ROLE_CLIENTE"), ADMIN(2, "ROLE_CLIENTE"), TECNICO(3, "ROLE_TECNICO");
+	PESSOA(0, "ROLE_ADMIN"), CLIENTE(1, "ROLE_CLIENTE"), ADMIN(2, "ROLE_ADMIN"), TECNICO(3, "ROLE_TECNICO");
 
 	private Integer codigo;
 	private String descricao;

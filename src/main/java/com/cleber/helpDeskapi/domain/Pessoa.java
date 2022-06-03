@@ -33,9 +33,11 @@ public abstract class Pessoa implements Serializable{
 	@Column(unique = true)
 	protected String cpf;
 	protected String senha;
+	
 	@ElementCollection(fetch = FetchType.EAGER)//anotacion que garante ler o perfil sempre que chamar a classe Pessoa
 	@CollectionTable(name = "PERFIS" )
 	protected Set<Integer> perfis = new HashSet<>();
+	
 	@JsonFormat(pattern = "dd/MM/yyyy") //Tras as datas do banco no formato prescrito o pattern
 	protected LocalDateTime dataCriacao = LocalDateTime.now();
 	

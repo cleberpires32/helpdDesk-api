@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
 import com.cleber.helpDeskapi.domain.enums.Perfil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Cliente extends Pessoa{
@@ -14,6 +15,7 @@ public class Cliente extends Pessoa{
 	private static final long serialVersionUID = 1L;
 	
 	@OneToMany(mappedBy = "cliente")
+	@JsonIgnore //protege contra a serialização qd chamar pessoa dispensa a chamada do chamados.
 	public List<Chamado> chamados = new ArrayList<>();
 
 	public Cliente() {
