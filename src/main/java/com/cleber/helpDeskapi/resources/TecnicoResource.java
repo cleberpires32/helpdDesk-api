@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cleber.helpDeskapi.domain.Tecnico;
+import com.cleber.helpDeskapi.dtos.TecnicoDto;
 import com.cleber.helpDeskapi.service.TecnicoService;
 
 @RestController
@@ -18,8 +19,9 @@ public class TecnicoResource {
 	private TecnicoService service;
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Tecnico> buscarPorId(@PathVariable Integer id){
+	public ResponseEntity<TecnicoDto> buscarPorId(@PathVariable Integer id){
 		Tecnico tecnico = service.findById(id);
-		return ResponseEntity.ok().body(tecnico);
+		TecnicoDto dto = new TecnicoDto(tecnico);
+		return ResponseEntity.ok().body(dto);
 	}
 }
