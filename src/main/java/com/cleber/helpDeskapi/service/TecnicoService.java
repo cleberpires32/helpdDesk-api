@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.cleber.helpDeskapi.domain.Tecnico;
 import com.cleber.helpDeskapi.repository.TecnicoRepository;
+import com.cleber.helpDeskapi.service.exception.ObjectNotFoundException;
 
 @Service
 public class TecnicoService {
@@ -17,6 +18,6 @@ public class TecnicoService {
 	public Tecnico findById(Integer id) {
 		Optional<Tecnico> tecnico = tecnicoRepository.findById(id);
 		
-		return tecnico.orElse(null);
+		return tecnico.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado com id: "+ id));
 	}
 }
