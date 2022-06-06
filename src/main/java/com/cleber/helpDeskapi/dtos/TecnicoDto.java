@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import javax.validation.constraints.NotNull;
+
 import com.cleber.helpDeskapi.domain.Tecnico;
 import com.cleber.helpDeskapi.domain.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -12,8 +14,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class TecnicoDto {
 
 	protected Integer id;
+	@NotNull
 	protected String nome;
+	@NotNull
 	protected String email;
+	@NotNull
 	protected String cpf;
 	protected String senha;
 	protected Set<Integer> perfis = new HashSet<>();
