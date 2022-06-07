@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
 import com.cleber.helpDeskapi.domain.enums.Perfil;
+import com.cleber.helpDeskapi.dtos.ClienteDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -36,4 +37,11 @@ public class Cliente extends Pessoa{
 		this.chamados = chamados;
 	}
 
+	public Cliente(ClienteDto dto) {
+		this.id = dto.getId();
+		this.nome = dto.getNome();
+		this.email = dto.getEmail();
+		this.cpf = dto.getCpf();
+		this.senha = dto.getSenha();
+	}
 }
