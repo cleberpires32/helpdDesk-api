@@ -43,7 +43,8 @@ public class Chamado implements Serializable {
 		// super();
 	}
 
-	public Chamado(Integer id, String titulo, String observacoes, Prioridade prioridade, Status status, Tecnico tecnico, Cliente cliente) {
+	public Chamado(Integer id, String titulo, String observacoes, Prioridade prioridade, Status status, Tecnico tecnico,
+			Cliente cliente) {
 		// super();
 		this.id = id;
 		this.titulo = titulo;
@@ -108,6 +109,22 @@ public class Chamado implements Serializable {
 
 	public void setPrioridade(Prioridade prioridade) {
 		this.prioridade = prioridade;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public Tecnico getTecnico() {
+		return tecnico;
+	}
+
+	public void setTecnico(Tecnico tecnico) {
+		this.tecnico = tecnico;
 	}
 
 	@Override
