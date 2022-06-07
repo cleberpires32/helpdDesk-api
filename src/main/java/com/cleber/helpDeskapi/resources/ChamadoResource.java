@@ -1,5 +1,8 @@
 package com.cleber.helpDeskapi.resources;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,5 +24,11 @@ public class ChamadoResource {
 	public ResponseEntity<ChamadoDto> findById(@PathVariable Integer id){
 		ChamadoDto dto = service.findById(id);
 		return ResponseEntity.ok().body(dto);
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<ChamadoDto>> findByAll(){
+		List<ChamadoDto> list = service.findByAll();
+		return ResponseEntity.ok().body(list);
 	}
 }
