@@ -8,9 +8,11 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -52,5 +54,12 @@ public class TecnicoResource {
 				.toUri();
 		return ResponseEntity.created(uri).build();
 
+	}
+
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<TecnicoDto> update(@PathVariable Integer id, 
+			@Validated @RequestBody TecnicoDto objDto){
+		Tecnico tec = service.update(id, objDto);
+		return ResponseEntity.ok().body(new TecnicoDto(tec));
 	}
 }
