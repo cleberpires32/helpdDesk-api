@@ -16,7 +16,7 @@ import com.cleber.helpDeskapi.service.exception.ObjectNotFoundException;
 
 @Service
 public class TecnicoService {
-	
+
 	@Autowired
 	private TecnicoRepository tecnicoRepository;
 	@Autowired
@@ -24,11 +24,11 @@ public class TecnicoService {
 
 	public Tecnico findById(Integer id) {
 		Optional<Tecnico> tecnico = tecnicoRepository.findById(id);
-		
-		return tecnico.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado com id: "+ id));
+
+		return tecnico.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado com id: " + id));
 	}
-	
-	public List<Tecnico> findAll(){
+
+	public List<Tecnico> findAll() {
 		return tecnicoRepository.findAll();
 	}
 
@@ -41,18 +41,18 @@ public class TecnicoService {
 
 	private void validaPorCpfeEmail(TecnicoDto tecnico) {
 		Optional<Pessoa> pessoaComCpf = pessoaRepository.findByCpf(tecnico.getCpf());
-		
-		if(pessoaComCpf.isPresent() && pessoaComCpf.get().getId() != tecnico.getId()) {
-			
+
+		if (pessoaComCpf.isPresent() && pessoaComCpf.get().getId() != tecnico.getId()) {
+
 			throw new DataIntegrityViolationException("CPF já cadastrado no sistema.");
 		}
-		
+
 		Optional<Pessoa> pessoaComEmail = pessoaRepository.findByEmail(tecnico.getEmail());
-		
-		if(pessoaComEmail.isPresent() && pessoaComEmail.get().getId() != tecnico.getId()) {
+
+		if (pessoaComEmail.isPresent() && pessoaComEmail.get().getId() != tecnico.getId()) {
 			throw new DataIntegrityViolationException("Email já cadastrado no sistema");
 		}
-		
+
 	}
 
 	public Tecnico update(Integer id, TecnicoDto objDto) {
@@ -61,5 +61,14 @@ public class TecnicoService {
 		objDto.setId(id);
 		Tecnico tec = new Tecnico(objDto);
 		return tecnicoRepository.save(tec);
+	}
+
+	public void delete(Integer id) {
+		Tecnico tec = findById(id);
+		if (tec.getChamados().size() > 0) {
+			throw new DataIntegrityViolationException(
+					"O técnico não pode ser removido, pois existe(m) chamado(s) associado(s)");
+		}
+		tecnicoRepository.delete(tec);
 	}
 }
