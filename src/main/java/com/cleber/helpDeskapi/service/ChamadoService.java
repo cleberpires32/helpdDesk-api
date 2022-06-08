@@ -1,5 +1,6 @@
 package com.cleber.helpDeskapi.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -27,41 +28,53 @@ public class ChamadoService {
 	private ClienteService clienteService;
 	@Autowired
 	private TecnicoService tecnicoService;
-	
+
 	public ChamadoDto findById(Integer id) {
 		Optional<Chamado> op = repository.findById(id);
-		op.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado com id: "+id));
+		op.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado com id: " + id));
 		return new ChamadoDto(op.get());
 	}
 
 	public List<ChamadoDto> findByAll() {
-		List<Chamado> listCh =  repository.findAll();
+		List<Chamado> listCh = repository.findAll();
 		List<ChamadoDto> lDto = listCh.stream().map(ch -> new ChamadoDto(ch)).collect(Collectors.toList());
 		return lDto;
-		
+
+	}
+
+	public ChamadoDto update(Integer id, ChamadoDto dto) {
+		dto.setId(id);
+		findById(dto.getId());
+		Chamado chamado = newChamado(dto);
+		repository.save(chamado);
+		return new ChamadoDto(chamado);
 	}
 
 	public ChamadoDto create(@Valid ChamadoDto dto) {
 		Chamado chamado = repository.save(newChamado(dto));
-		return new ChamadoDto(chamado) ;
+		return new ChamadoDto(chamado);
 	}
 
 	private Chamado newChamado(ChamadoDto dto) {
-		Chamado ch = new Chamado();
 		Cliente cliente = clienteService.findById(dto.getCliente());
 		Tecnico tecnico = tecnicoService.findById(dto.getTecnico());
-		
-		if(dto.getId() != null) {
-			ch.setId(dto.getId());	
+
+		Chamado ch = new Chamado();
+		if (dto.getId() != null) {
+			ch.setId(dto.getId());
 		}
-		
+
+		if(dto.getStatus().equals(Status.ENCERRADO.getCodigo())) {
+			ch.setDataFechamento(LocalDateTime.now());
+		}
 		ch.setStatus(Status.toEnum(dto.getStatus()));
 		ch.setPrioridade(Prioridade.toEnum(dto.getPrioridade()));
 		ch.setTitulo(dto.getTitulo());
 		ch.setObservacoes(dto.getObservacoes());
 		ch.setCliente(cliente);
 		ch.setTecnico(tecnico);
-		
+
 		return ch;
 	}
+
 }

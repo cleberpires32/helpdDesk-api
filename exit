@@ -1,0 +1,125 @@
+[33mcommit c28738de51752cd5d176b9109a3a8d4c8ccd4b10[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: cleberpires32 <cleberpires269@gmail.com>
+Date:   Tue Jun 7 17:42:09 2022 -0300
+
+    implementação do methodo create de chamados
+
+[33mcommit e92d83b6a9b370ad3cf21535d854bd730743ae4b[m
+Author: cleberpires32 <cleberpires269@gmail.com>
+Date:   Tue Jun 7 16:06:40 2022 -0300
+
+    criação do findByAll para chamados
+
+[33mcommit e664cf623b4d8bfcae809d3f944cbf819c1a1fe1[m
+Author: cleberpires32 <cleberpires269@gmail.com>
+Date:   Tue Jun 7 15:17:08 2022 -0300
+
+    implementado modulo para crud Chamado com findById()
+
+[33mcommit d83ece8c1b3f01558cf9d63c9266f411e98ee01e[m
+Author: cleberpires32 <cleberpires269@gmail.com>
+Date:   Mon Jun 6 23:54:33 2022 -0300
+
+    criação de CRUD para cliente implementado
+
+[33mcommit 81b96098c7ebbe09f08251c148f5cba50ed3d770[m
+Author: cleberpires32 <cleberpires269@gmail.com>
+Date:   Mon Jun 6 23:11:41 2022 -0300
+
+    methodo delete para tecnico implementado
+
+[33mcommit c414277373781929209cb4ea2486aad2a83631ef[m
+Author: cleberpires32 <cleberpires269@gmail.com>
+Date:   Mon Jun 6 22:35:22 2022 -0300
+
+    methodo update em tecnicos implementado
+
+[33mcommit 2017df2c8fccedc454d630e873ffa59b12004f49[m
+Author: cleberpires32 <cleberpires269@gmail.com>
+Date:   Mon Jun 6 18:36:38 2022 -0300
+
+    implementação na validação dos campos de usuário
+
+[33mcommit 3babb1975ae7334c25486214e439d1516077f0ac[m
+Author: cleberpires32 <cleberpires269@gmail.com>
+Date:   Mon Jun 6 15:50:30 2022 -0300
+
+    trabameneto de exceção de cpf e email ja cadastrado implementado
+
+[33mcommit 059474cc79faa730a19d70c7242a1f9be9bfae3f[m
+Author: cleberpires32 <cleberpires269@gmail.com>
+Date:   Sun Jun 5 23:44:33 2022 -0300
+
+    endpoint create de tecnicos implementado
+
+[33mcommit 53719f0b020703420032a848fb0a13b2b3feee90[m
+Author: cleberpires32 <cleberpires269@gmail.com>
+Date:   Sun Jun 5 23:15:12 2022 -0300
+
+    endpoint finda
+
+[33mcommit eee41ae9827d0244915e2e75b5e1bbf2efc32d7f[m
+Author: cleberpires32 <cleberpires269@gmail.com>
+Date:   Sun Jun 5 22:58:47 2022 -0300
+
+    tratamento de exceção do Object Not Found implemntado
+
+[33mcommit 367f3e1435cc420f52a61b39f7be02ab156c9b33[m
+Author: cleberpires32 <cleberpires269@gmail.com>
+Date:   Fri Jun 3 17:16:24 2022 -0300
+
+    mudança de propertis de test para dev
+
+[33mcommit ecb3f00dfee46752f407106d2451b8bd475feaf0[m
+Author: cleberpires32 <cleberpires269@gmail.com>
+Date:   Fri Jun 3 14:37:48 2022 -0300
+
+    implementado primeiro endpoint resource
+
+[33mcommit 8a2f1a9bffcd9632b0b7a35018c0aa4b7450a550[m
+Author: cleberpires32 <cleberpires269@gmail.com>
+Date:   Fri Jun 3 13:52:02 2022 -0300
+
+    ajuste e anotações de erros no código
+
+[33mcommit 00bb50d257a9e489b3097daf8cc07227a79e59ea[m
+Author: cleberpires32 <cleberpires269@gmail.com>
+Date:   Fri Jun 3 11:22:04 2022 -0300
+
+    perfil de desenvolmento. A anterior foi o perfil de test
+
+[33mcommit 990a2b74e357747b6fa5df1295400047dcbb85e0[m
+Author: cleberpires32 <cleberpires269@gmail.com>
+Date:   Fri Jun 3 09:27:17 2022 -0300
+
+    implementado o service de carga de test
+
+[33mcommit 935bc2e7b48d7e18ff988247c3ccf9b4b9b44d01[m
+Author: cleberpires32 <cleberpires269@gmail.com>
+Date:   Thu Jun 2 22:24:12 2022 -0300
+
+    criação da primeira carda de dados no bd h2
+
+[33mcommit de13e779a40c3320c7e7e9c1cf3968e7736e6c3d[m
+Author: cleberpires32 <cleberpires269@gmail.com>
+Date:   Thu Jun 2 22:21:59 2022 -0300
+
+    implementado o repository
+
+[33mcommit c0cbf0a4bf2512548524684e147485172f4eb0de[m
+Author: cleberpires32 <cleberpires269@gmail.com>
+Date:   Wed Jun 1 17:21:45 2022 -0300
+
+    anotações JPA nas entidades
+
+[33mcommit 8e68a8888adf4dfbbf40ffbb291484a280078d06[m
+Author: cleberpires32 <cleberpires269@gmail.com>
+Date:   Wed Jun 1 16:32:26 2022 -0300
+
+    classe dominio iniciada
+
+[33mcommit dff2b4eb8437ddcd14eee6f36b6f4755c77a8393[m[33m ([m[1;31morigin/main[m[33m)[m
+Author: cleberpires32 <cleberpires269@gmail.com>
+Date:   Wed Jun 1 15:05:58 2022 -0300
+
+    projeto iniciado

@@ -11,8 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.cleber.helpDeskapi.domain.enums.Status;
 import com.cleber.helpDeskapi.domain.enums.Prioridade;
+import com.cleber.helpDeskapi.domain.enums.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
@@ -39,13 +39,11 @@ public class Chamado implements Serializable {
 	@JoinColumn(name = "tecnico_id")
 	private Tecnico tecnico;
 
-	public Chamado() {
-		// super();
-	}
+	public Chamado() {}
 
 	public Chamado(Integer id, String titulo, String observacoes, Prioridade prioridade, Status status, Tecnico tecnico,
 			Cliente cliente) {
-		// super();
+
 		this.id = id;
 		this.titulo = titulo;
 		this.observacoes = observacoes;
@@ -54,7 +52,7 @@ public class Chamado implements Serializable {
 		this.tecnico = tecnico;
 		this.cliente = cliente;
 	}
-
+	
 	public Integer getId() {
 		return id;
 	}

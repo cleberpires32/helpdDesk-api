@@ -3,7 +3,6 @@ package com.cleber.helpDeskapi.dtos;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.cleber.helpDeskapi.domain.Chamado;
