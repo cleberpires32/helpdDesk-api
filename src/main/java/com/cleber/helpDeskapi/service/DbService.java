@@ -28,9 +28,9 @@ public class DbService {
 	public void instaciaDbService() {
 		Tecnico tc1 = new Tecnico(null, "Cleber Pires", "cleber@gmail.com", "11683800060", "123585adm");
 		tc1.addPerfil(Perfil.ADMIN);
-		Tecnico tc2 = new Tecnico(null, "Joao Alves", "cleber@gmail.com", "79471566460", "123585adm");
-		Tecnico tc3 = new Tecnico(null, "Felipe", "cleber@gmail.com", "91405277602", "123585adm");
-		Tecnico tc4 = new Tecnico(null, "Antonio", "cleber@gmail.com", "41354781589", "123585adm");
+		Tecnico tc2 = new Tecnico(null, "Joao Alves", "joao@gmail.com", "79471566460", "123585adm");
+		Tecnico tc3 = new Tecnico(null, "Felipe", "felipe@gmail.com", "91405277602", "123585adm");
+		Tecnico tc4 = new Tecnico(null, "Antonio", "antonio@gmail.com", "41354781589", "123585adm");
 		
 		Cliente cl1 = new Cliente(null, "Sidney Alves", "sidney@gmail.com", "54811402090", "5644563cli");
 		
