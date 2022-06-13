@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -19,10 +20,12 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.cleber.helpDeskapi.security.JwTAuthenticationFilter;
 import com.cleber.helpDeskapi.security.JwTUtil;
+import com.cleber.helpDeskapi.security.JwtAuthorizationFilter;
 
 /** Classe de configuração do Spring Security para autorização e authentic**/
-@EnableWebSecurity
 @Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 	//Representa o ambiente no qual o meu aplicativo está sendo executado. 
@@ -48,6 +51,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		//registrar filtro de autenticação sem security
 		http.addFilter(new JwTAuthenticationFilter(authenticationManager(), jwTUtil));
+		
+		http.addFilter(new JwtAuthorizationFilter(authenticationManager(), jwTUtil, userDetailsService));
 		
 		//aqui estou dizendo que qualquer requisição vier deste public_matcher seja permitido logo outra requisição diferente seja autenticada.
 		http.authorizeRequests().antMatchers(PUBLIC_MATCHER).permitAll().anyRequest().authenticated();
