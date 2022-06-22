@@ -12,6 +12,7 @@ import com.cleber.helpDeskapi.domain.Tecnico;
 import com.cleber.helpDeskapi.dtos.TecnicoDto;
 import com.cleber.helpDeskapi.repository.PessoaRepository;
 import com.cleber.helpDeskapi.repository.TecnicoRepository;
+import com.cleber.helpDeskapi.service.exception.ConstraintViolationException;
 import com.cleber.helpDeskapi.service.exception.DataIntegrityViolationException;
 import com.cleber.helpDeskapi.service.exception.ObjectNotFoundException;
 
@@ -41,7 +42,11 @@ public class TecnicoService {
 		validaPorCpfeEmail(tecnicoDto);
 		tecnicoDto.setSenha(encoder.encode(tecnicoDto.getSenha()));
 		Tecnico tecnico = new Tecnico(tecnicoDto);
-		return tecnicoRepository.save(tecnico);
+		try {
+		return	tecnicoRepository.save(tecnico);
+		} catch (Exception e) {
+			throw new ConstraintViolationException(e.getLocalizedMessage());
+		}		
 	}
 
 	private void validaPorCpfeEmail(TecnicoDto tecnico) {

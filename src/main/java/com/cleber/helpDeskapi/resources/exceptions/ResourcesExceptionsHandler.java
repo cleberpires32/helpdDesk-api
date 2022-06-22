@@ -9,6 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.cleber.helpDeskapi.service.exception.ConstraintViolationException;
 import com.cleber.helpDeskapi.service.exception.DataIntegrityViolationException;
 import com.cleber.helpDeskapi.service.exception.ObjectNotFoundException;
 
@@ -32,6 +33,14 @@ public class ResourcesExceptionsHandler {
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
 	}
 
+	@ExceptionHandler(ConstraintViolationException.class)
+	public ResponseEntity<StanderError> constraintViolationException(ConstraintViolationException ex,
+			HttpServletRequest request){
+		StanderError error = new StanderError(System.currentTimeMillis(), HttpStatus.FORBIDDEN.value(),
+				"Violação de dados durante a persistência", ex.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
+	}
+	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<StanderError> methodArgumentNotValidException(MethodArgumentNotValidException ex,
 			HttpServletRequest request) {
