@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -67,12 +69,15 @@ public class TecnicoService {
 
 	}
 
-	public Tecnico update(Integer id, TecnicoDto objDto) {
-		findById(id);
+	public Tecnico update(Integer id, @Valid TecnicoDto objDto) {
+		Tecnico tec = findById(id);
+		if(!tec.getSenha().equals(objDto.getSenha())) {
+			objDto.setSenha(encoder.encode(objDto.getSenha()));
+		}
 		validaPorCpfeEmail(objDto);
 		objDto.setId(id);
-		Tecnico tec = new Tecnico(objDto);
-		return tecnicoRepository.save(tec);
+		Tecnico tecAlterado = new Tecnico(objDto);
+		return tecnicoRepository.save(tecAlterado);
 	}
 
 	public void delete(Integer id) {
