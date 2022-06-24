@@ -17,9 +17,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.hibernate.validator.constraints.br.CPF;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import com.cleber.helpDeskapi.domain.enums.Perfil;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public abstract class Pessoa implements Serializable{
@@ -40,8 +41,8 @@ public abstract class Pessoa implements Serializable{
 	@ElementCollection(fetch = FetchType.EAGER)//anotacion que garante ler o perfil sempre que chamar a classe Pessoa
 	@CollectionTable(name = "PERFIS" )
 	protected Set<Integer> perfis = new HashSet<>();
-	
-	@JsonFormat(pattern = "dd/MM/yyyy") //Tras as datas do banco no formato prescrito o pattern
+
+	@DateTimeFormat(iso = ISO.DATE_TIME,pattern = "yyyy-MM-dd HH:mm:ss" )
 	protected LocalDateTime dataCriacao = LocalDateTime.now();
 	
 	public Pessoa() {

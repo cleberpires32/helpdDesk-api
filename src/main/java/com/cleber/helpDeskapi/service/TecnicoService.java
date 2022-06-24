@@ -1,5 +1,6 @@
 package com.cleber.helpDeskapi.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,6 +43,7 @@ public class TecnicoService {
 		validaPorCpfeEmail(tecnicoDto);
 		tecnicoDto.setSenha(encoder.encode(tecnicoDto.getSenha()));
 		Tecnico tecnico = new Tecnico(tecnicoDto);
+		tecnico.setDataCriacao(LocalDateTime.now());
 		try {
 		return	tecnicoRepository.save(tecnico);
 		} catch (Exception e) {

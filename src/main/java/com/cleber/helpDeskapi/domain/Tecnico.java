@@ -43,6 +43,9 @@ public class Tecnico extends Pessoa {
 		this.email = dto.getEmail();
 		this.cpf = dto.getCpf();
 		this.senha = dto.getSenha();
+		dto.getPerfis().forEach(f ->{
+			this.addPerfil(f);
+		});
 	}
 
 }

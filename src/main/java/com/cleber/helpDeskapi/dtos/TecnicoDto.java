@@ -1,5 +1,6 @@
 package com.cleber.helpDeskapi.dtos;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -7,12 +8,16 @@ import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 import com.cleber.helpDeskapi.domain.Tecnico;
 import com.cleber.helpDeskapi.domain.enums.Perfil;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class TecnicoDto {
-
+public class TecnicoDto implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	protected Integer id;
 	@NotNull
 	protected String nome;
@@ -22,7 +27,8 @@ public class TecnicoDto {
 	protected String cpf;
 	protected String senha;
 	protected Set<Integer> perfis = new HashSet<>();
-	@JsonFormat(pattern = "dd/MM/yyyy") //Tras as datas do banco no formato prescrito o pattern
+	@JsonIgnore
+	@DateTimeFormat(iso = ISO.DATE_TIME,pattern = "yyyy-MM-dd HH:mm:ss" )
 	protected LocalDateTime dataCriacao = LocalDateTime.now();
 
 	public TecnicoDto() {
