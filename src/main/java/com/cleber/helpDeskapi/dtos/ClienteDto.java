@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 import com.cleber.helpDeskapi.domain.Cliente;
 import com.cleber.helpDeskapi.domain.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class ClienteDto {
 
@@ -22,6 +23,7 @@ public class ClienteDto {
 	protected String cpf;
 	protected String senha;
 	protected Set<Integer> perfis = new HashSet<>();
+	@JsonIgnore
 	@JsonFormat(pattern = "dd/MM/yyyy") //Tras as datas do banco no formato prescrito o pattern
 	protected LocalDateTime dataCriacao = LocalDateTime.now();
 

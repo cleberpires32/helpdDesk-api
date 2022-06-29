@@ -7,14 +7,17 @@ import javax.validation.constraints.NotNull;
 
 import com.cleber.helpDeskapi.domain.Chamado;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class ChamadoDto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
+	@JsonIgnore
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDateTime dataAbertura = LocalDateTime.now();
+	@JsonIgnore
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDateTime dataFechamento;
 	@NotNull(message = "O campo Status é requerido")

@@ -37,12 +37,15 @@ public class DbService {
 		Tecnico tc4 = new Tecnico(null, "Antonio", "antonio@gmail.com", "41354781589",encode.encode("1235tecnico"));
 		
 		Cliente cl1 = new Cliente(null, "Sidney Alves", "sidney@gmail.com", "54811402090", encode.encode("123cliente"));
+		Cliente cl2 = new Cliente(null, "Alberto Duran", "alberto@gmail.com", "64546306172", encode.encode("123"));
 		
 		Chamado ch1 = new Chamado(null, "Primeira carga", "Chamado 1", Prioridade.MEDIA, Status.ANDAMENTO, tc1, cl1);
+		Chamado ch2 = new Chamado(null, "Segunda carga", "Chamado 2", Prioridade.ALTA, Status.ABERTO, tc3, cl1);
+		Chamado ch3 = new Chamado(null, "Terceira carga", "Chamado 3", Prioridade.BAIXA, Status.CANCELADO, tc2, cl2);
 	
 		tecnicoRepository.saveAll(Arrays.asList(tc1,tc2,tc3,tc4));
-		clienteRepository.saveAll(Arrays.asList(cl1));
-		chamadoRepository.saveAll(Arrays.asList(ch1));
+		clienteRepository.saveAll(Arrays.asList(cl1,cl2));
+		chamadoRepository.saveAll(Arrays.asList(ch1,ch2,ch3));
 		
 	}
 	

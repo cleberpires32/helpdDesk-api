@@ -42,7 +42,7 @@ public class ChamadoService {
 
 	}
 
-	public ChamadoDto update(Integer id, ChamadoDto dto) {
+	public ChamadoDto update(Integer id, @Valid ChamadoDto dto) {
 		dto.setId(id);
 		findById(dto.getId());
 		Chamado chamado = newChamado(dto);
