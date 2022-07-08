@@ -52,7 +52,7 @@ public class ItensEstoque {
 		this.quantidade = itens.getQuantidade();
 		this.valor = itens.getValor();
 	}
-	
+		
 	public Integer getId() {
 		return id;
 	}

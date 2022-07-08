@@ -1,5 +1,7 @@
 package com.cleber.helpDeskapi.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,10 @@ public class ItensEstoqueService {
 		dto.setId(null);
 		ItensEstoque iten = new ItensEstoque(dto);
 		return repository.save(iten);
+	}
+
+	public List<ItensEstoque> findAll() {
+		return repository.findAll();
 	}
 
 }
