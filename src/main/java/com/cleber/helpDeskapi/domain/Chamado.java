@@ -2,6 +2,8 @@ package com.cleber.helpDeskapi.domain;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -9,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import com.cleber.helpDeskapi.domain.enums.Prioridade;
@@ -38,6 +42,11 @@ public class Chamado implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "tecnico_id")
 	private Tecnico tecnico;
+	
+	@ManyToMany
+	@JoinTable(name = "pedido_estoque",joinColumns = @JoinColumn(name = "chamado_id"),
+	inverseJoinColumns = @JoinColumn(name = "itensEstoque_id"))
+	private List<ItensEstoque> itensEstoque = new ArrayList<>();
 
 	public Chamado() {}
 
@@ -124,7 +133,14 @@ public class Chamado implements Serializable {
 	public void setTecnico(Tecnico tecnico) {
 		this.tecnico = tecnico;
 	}
+	
+	public List<ItensEstoque> getItensEstoque() {
+		return itensEstoque;
+	}
 
+	public void setItensEstoque(List<ItensEstoque> itensEstoque) {
+		this.itensEstoque = itensEstoque;
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -141,5 +157,6 @@ public class Chamado implements Serializable {
 		Chamado other = (Chamado) obj;
 		return Objects.equals(id, other.id);
 	}
+
 
 }
