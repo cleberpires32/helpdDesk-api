@@ -73,6 +73,7 @@ public class ChamadoService {
 		ch.setObservacoes(dto.getObservacoes());
 		ch.setCliente(cliente);
 		ch.setTecnico(tecnico);
+		ch.setItensEstoque(dto.getItensEstoque());
 
 		return ch;
 	}

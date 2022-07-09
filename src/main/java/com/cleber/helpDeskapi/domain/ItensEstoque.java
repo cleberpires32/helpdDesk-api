@@ -1,5 +1,6 @@
 package com.cleber.helpDeskapi.domain;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +16,10 @@ import javax.persistence.ManyToMany;
 import com.cleber.helpDeskapi.dtos.ItensEstoqueDto;
 
 @Entity
-public class ItensEstoque {
+public class ItensEstoque implements Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
