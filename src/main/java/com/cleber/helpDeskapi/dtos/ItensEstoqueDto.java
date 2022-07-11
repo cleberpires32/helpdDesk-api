@@ -21,6 +21,8 @@ public class ItensEstoqueDto implements Serializable {
 	
 	private BigDecimal valor;
 	
+	private Boolean vinculoComChamado;
+	
 	public ItensEstoqueDto() {}
 	
 	public ItensEstoqueDto(ItensEstoque itens) {
@@ -30,6 +32,7 @@ public class ItensEstoqueDto implements Serializable {
 		this.codigo = itens.getCodigo();
 		this.quantidade = itens.getQuantidade();
 		this.valor = itens.getValor();
+		this.vinculoComChamado = false;
 	}
 	
 	public Integer getId() {
@@ -61,6 +64,14 @@ public class ItensEstoqueDto implements Serializable {
 	}
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
+	}
+
+	public Boolean getVinculoComChamado() {
+		return vinculoComChamado;
+	}
+
+	public void setVinculoComChamado(Boolean vinculoComChamado) {
+		this.vinculoComChamado = vinculoComChamado;
 	}
 
 }

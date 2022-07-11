@@ -38,7 +38,7 @@ public class ChamadoDto implements Serializable {
 	private Integer tecnico;
 	private String nomeTecnico;
 	private List<ItensEstoque> itensEstoque = new ArrayList<>();
-	
+
 	public ChamadoDto() {
 		super();
 	}
@@ -165,13 +165,11 @@ public class ChamadoDto implements Serializable {
 	}
 
 	public List<ItensEstoque> getItensEstoque() {
-		return itensEstoque;
+		return this.itensEstoque;
 	}
 
 	public void setItensEstoque(List<ItensEstoque> itensEstoque) {
 		this.itensEstoque = itensEstoque;
 	}
-
-
 
 }

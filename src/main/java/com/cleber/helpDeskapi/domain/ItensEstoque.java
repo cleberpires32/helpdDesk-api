@@ -2,8 +2,6 @@ package com.cleber.helpDeskapi.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -11,7 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
 import com.cleber.helpDeskapi.dtos.ItensEstoqueDto;
 
@@ -31,9 +28,6 @@ public class ItensEstoque implements Serializable{
 	private BigDecimal valor;
 	@Column
 	private Integer quantidade;
-	
-	@ManyToMany(mappedBy = "itensEstoque")
-	private List<Chamado> listaChamado = new ArrayList<>();
 
 	public ItensEstoque() {
 	}
@@ -94,14 +88,6 @@ public class ItensEstoque implements Serializable{
 
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
-	}
-
-	public List<Chamado> getListaChamado() {
-		return listaChamado;
-	}
-
-	public void setListaChamado(List<Chamado> listaChamado) {
-		this.listaChamado = listaChamado;
 	}
 
 	@Override

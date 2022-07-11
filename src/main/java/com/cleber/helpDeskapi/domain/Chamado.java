@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,9 +21,9 @@ import com.cleber.helpDeskapi.domain.enums.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-public class Chamado implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class Chamado implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -43,7 +44,7 @@ public class Chamado implements Serializable {
 	@JoinColumn(name = "tecnico_id")
 	private Tecnico tecnico;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "pedido_estoque",joinColumns = @JoinColumn(name = "chamado_id"),
 	inverseJoinColumns = @JoinColumn(name = "itensEstoque_id"))
 	private List<ItensEstoque> itensEstoque = new ArrayList<>();

@@ -43,11 +43,12 @@ public class ChamadoService {
 	}
 
 	public ChamadoDto update(Integer id, @Valid ChamadoDto dto) {
+		Chamado c = new Chamado();
 		dto.setId(id);
 		findById(dto.getId());
 		Chamado chamado = newChamado(dto);
-		repository.save(chamado);
-		return new ChamadoDto(chamado);
+		c = repository.save(chamado);
+		return new ChamadoDto(c);
 	}
 
 	public ChamadoDto create(@Valid ChamadoDto dto) {

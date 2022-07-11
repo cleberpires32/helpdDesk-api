@@ -1,5 +1,6 @@
 package com.cleber.helpDeskapi.dtos;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -12,8 +13,9 @@ import com.cleber.helpDeskapi.domain.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class ClienteDto {
+public class ClienteDto implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	protected Integer id;
 	@NotNull
 	protected String nome;
