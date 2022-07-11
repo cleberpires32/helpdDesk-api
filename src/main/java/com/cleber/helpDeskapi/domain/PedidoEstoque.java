@@ -1,52 +1,63 @@
 package com.cleber.helpDeskapi.domain;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 
 @Entity
 public class PedidoEstoque {
 
-	@Column
-	private Integer chamado_id;
-	@Column
-	private Integer itensEstoque_id;
-	@Column
-	private Integer quantidade_solicitada;
+	@EmbeddedId
+	private PedidoEstoquePK pk;
 	
-	public PedidoEstoque() {
+	@MapsId("chamadoId")
+    @ManyToOne
+    @JoinColumn(name="chamadoId", referencedColumnName="id")
+	private Chamado chamado;
+	
+	@MapsId("itensEstoqueId")
+	@ManyToOne
+	@JoinColumn(name = "itensEstoqueId", referencedColumnName = "id")
+	private ItensEstoque itensEstoque = new ItensEstoque();
+	
+	@Column
+	private Integer quantidadeSolicitada;
+
+	public Chamado getChamado() {
+		return chamado;
+	}
+
+	public void setChamado(Chamado chamado) {
+		this.chamado = chamado;
+	}
+
+	public Integer getQuantidadeSolicitada() {
+		return quantidadeSolicitada;
+	}
+
+	public void setQuantidadeSolicitada(Integer quantidadeSolicitada) {
+		this.quantidadeSolicitada = quantidadeSolicitada;
 	}
 	
-	public PedidoEstoque(Integer chamado_id, Integer itensEstoque_id, Integer quantidade_solicitada) {
-		super();
-		this.chamado_id = chamado_id;
-		this.itensEstoque_id = itensEstoque_id;
-		this.quantidade_solicitada = quantidade_solicitada;
+	public ItensEstoque getItensEstoque() {
+		return itensEstoque;
 	}
-	
-	public Integer getChamado_id() {
-		return chamado_id;
-	}
-	public void setChamado_id(Integer chamado_id) {
-		this.chamado_id = chamado_id;
-	}
-	public Integer getItensEstoque_id() {
-		return itensEstoque_id;
-	}
-	public void setItensEstoque_id(Integer itensEstoque_id) {
-		this.itensEstoque_id = itensEstoque_id;
-	}
-	public Integer getQuantidade_solicitada() {
-		return quantidade_solicitada;
-	}
-	public void setQuantidade_solicitada(Integer quantidade_solicitada) {
-		this.quantidade_solicitada = quantidade_solicitada;
+
+	public void setItensEstoque(ItensEstoque itensEstoque) {
+		this.itensEstoque = itensEstoque;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(chamado_id, itensEstoque_id);
+		return Objects.hash(chamado, itensEstoque);
 	}
 
 	@Override
@@ -58,8 +69,10 @@ public class PedidoEstoque {
 		if (getClass() != obj.getClass())
 			return false;
 		PedidoEstoque other = (PedidoEstoque) obj;
-		return Objects.equals(chamado_id, other.chamado_id) && Objects.equals(itensEstoque_id, other.itensEstoque_id);
+		return Objects.equals(chamado, other.chamado) && Objects.equals(itensEstoque, other.itensEstoque);
 	}
+	
+
 
 
 }

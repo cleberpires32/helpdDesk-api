@@ -2,19 +2,18 @@ package com.cleber.helpDeskapi.domain;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.cleber.helpDeskapi.domain.enums.Prioridade;
 import com.cleber.helpDeskapi.domain.enums.Status;
@@ -43,12 +42,15 @@ public class Chamado implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "tecnico_id")
 	private Tecnico tecnico;
-	
+/*	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "pedido_estoque",joinColumns = @JoinColumn(name = "chamado_id"),
 	inverseJoinColumns = @JoinColumn(name = "itensEstoque_id"))
 	private List<ItensEstoque> itensEstoque = new ArrayList<>();
-
+*/
+	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "chamado")
+	private Set<PedidoEstoque> pedidoEstoque = new HashSet<>();
+	
 	public Chamado() {}
 
 	public Chamado(Integer id, String titulo, String observacoes, Prioridade prioridade, Status status, Tecnico tecnico,
@@ -134,7 +136,7 @@ public class Chamado implements Serializable{
 	public void setTecnico(Tecnico tecnico) {
 		this.tecnico = tecnico;
 	}
-	
+/*	
 	public List<ItensEstoque> getItensEstoque() {
 		return itensEstoque;
 	}
@@ -142,6 +144,16 @@ public class Chamado implements Serializable{
 	public void setItensEstoque(List<ItensEstoque> itensEstoque) {
 		this.itensEstoque = itensEstoque;
 	}
+*/
+	
+	public Set<PedidoEstoque> getPedidoEstoque() {
+		return pedidoEstoque;
+	}
+
+	public void setPedidoEstoque(Set<PedidoEstoque> pedidoEstoque) {
+		this.pedidoEstoque = pedidoEstoque;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

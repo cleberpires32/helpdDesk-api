@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.cleber.helpDeskapi.domain.Chamado;
 import com.cleber.helpDeskapi.domain.Cliente;
+import com.cleber.helpDeskapi.domain.PedidoEstoque;
 import com.cleber.helpDeskapi.domain.Tecnico;
 import com.cleber.helpDeskapi.domain.enums.Prioridade;
 import com.cleber.helpDeskapi.domain.enums.Status;
@@ -68,14 +69,21 @@ public class ChamadoService {
 		if(dto.getStatus().equals(Status.ENCERRADO.getCodigo())) {
 			ch.setDataFechamento(LocalDateTime.now());
 		}
+		
 		ch.setStatus(Status.toEnum(dto.getStatus()));
 		ch.setPrioridade(Prioridade.toEnum(dto.getPrioridade()));
 		ch.setTitulo(dto.getTitulo());
 		ch.setObservacoes(dto.getObservacoes());
 		ch.setCliente(cliente);
 		ch.setTecnico(tecnico);
-		ch.setItensEstoque(dto.getItensEstoque());
-
+		
+		PedidoEstoque pedido = new PedidoEstoque();
+		pedido.setChamado(ch);
+		dto.getItensEstoque().stream().forEach(itendto ->{
+			pedido.setItensEstoque(itendto);
+			pedido.setQuantidadeSolicitada(itendto.getQuantidade());
+		});
+		
 		return ch;
 	}
 
