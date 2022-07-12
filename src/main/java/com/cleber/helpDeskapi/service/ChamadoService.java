@@ -72,47 +72,49 @@ public class ChamadoService {
 		Tecnico tecnico = tecnicoService.findById(dto.getTecnico());
 
 		Chamado ch = new Chamado();
-		if (dto.getId() != null) {
-			ch.setId(dto.getId());
-		}
 
-		if(dto.getStatus().equals(Status.ENCERRADO.getCodigo())) {
+		if (dto.getStatus().equals(Status.ENCERRADO.getCodigo())) {
 			ch.setDataFechamento(LocalDateTime.now());
 		}
-		
+
 		ch.setStatus(Status.toEnum(dto.getStatus()));
 		ch.setPrioridade(Prioridade.toEnum(dto.getPrioridade()));
 		ch.setTitulo(dto.getTitulo());
 		ch.setObservacoes(dto.getObservacoes());
 		ch.setCliente(cliente);
 		ch.setTecnico(tecnico);
-		
-		PedidoEstoque pedido = new PedidoEstoque();
-		pedido.setChamado(ch);
-		dto.getItensEstoque().stream().forEach(itendto ->{
-			pedido.setItensEstoque(itendto);
-			pedido.setQuantidadeSolicitada(itendto.getQuantidadeSolicitada());
-		});
-		
-		pedidoEstoqueService.create(pedido);
-		
-		alteraQuantidadeEstoque(dto);
-		
+
+		toUpdate(dto, ch);
+
 		return ch;
 	}
 
+	private void toUpdate(ChamadoDto dto, Chamado ch) {
+		PedidoEstoque pedido = new PedidoEstoque();
+		if (dto.getId() != null) {
+			ch.setId(dto.getId());
+			pedido.setChamado(ch);
+			dto.getItensEstoque().stream().forEach(itendto -> {
+				pedido.setItensEstoque(itendto);
+				pedido.setQuantidadeSolicitada(itendto.getQuantidadeSolicitada());
+			});
+			
+			pedidoEstoqueService.create(pedido);			
+			alteraQuantidadeEstoque(dto);
+		}
+	}
+	
 	private void alteraQuantidadeEstoque(ChamadoDto chamadoDto) {
 		List<ItensEstoque> listaQuantidadeAlterada = new ArrayList<>();
-		chamadoDto.getItensEstoque().stream().forEach(iDto ->{
+		chamadoDto.getItensEstoque().stream().forEach(iDto -> {
 			Optional<ItensEstoque> itensBd = itensEstoqueRepository.findById(iDto.getId());
-			if(itensBd.isPresent()) {
+			if (itensBd.isPresent()) {
 				itensBd.get().setQuantidade(itensBd.get().getQuantidade() - iDto.getQuantidadeSolicitada());
 				listaQuantidadeAlterada.add(itensBd.get());
 			}
 		});
-		
+
 		itensEstoqueRepository.saveAll(listaQuantidadeAlterada);
 	}
-	
 
 }
