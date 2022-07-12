@@ -21,6 +21,15 @@ public class ItensEstoqueService {
 		ItensEstoque iten = new ItensEstoque(dto);
 		return repository.save(iten);
 	}
+	
+	public ItensEstoque update(ItensEstoqueDto itens,Integer id ) {
+		ItensEstoque itenDb = findById(id);
+		itenDb.setCodigo(itens.getCodigo());
+		itenDb.setDescricao(itens.getDescricao());
+		itenDb.setQuantidade(itens.getQuantidade());
+		repository.save(itenDb);
+		return itenDb;
+	}
 
 	public List<ItensEstoque> findAll() {
 		return repository.findAll();

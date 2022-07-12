@@ -8,11 +8,14 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -47,5 +50,13 @@ public class ItensEstoqueResource {
 		ItensEstoque iten= itensService.findById(id);
 		ItensEstoqueDto dto = new ItensEstoqueDto(iten);
 		return ResponseEntity.ok().body(dto);
+	}
+
+	@PreAuthorize("hasAnyRole('ADMIN')")
+	@PutMapping
+	public ResponseEntity<ItensEstoqueDto> update(@PathVariable Integer id, @RequestBody ItensEstoqueDto dto){
+		ItensEstoque itensAlterada = itensService.update(dto, id);
+		ItensEstoqueDto itens = new ItensEstoqueDto(itensAlterada);
+		return ResponseEntity.ok().body(itens);
 	}
 }
