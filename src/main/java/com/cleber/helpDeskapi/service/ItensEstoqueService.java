@@ -27,6 +27,7 @@ public class ItensEstoqueService {
 		itenDb.setCodigo(itens.getCodigo());
 		itenDb.setDescricao(itens.getDescricao());
 		itenDb.setQuantidade(itens.getQuantidade());
+		itenDb.setValor(itens.getValor());
 		repository.save(itenDb);
 		return itenDb;
 	}

@@ -53,7 +53,7 @@ public class ItensEstoqueResource {
 	}
 
 	@PreAuthorize("hasAnyRole('ADMIN')")
-	@PutMapping
+	@PutMapping(value = "/{id}")
 	public ResponseEntity<ItensEstoqueDto> update(@PathVariable Integer id, @RequestBody ItensEstoqueDto dto){
 		ItensEstoque itensAlterada = itensService.update(dto, id);
 		ItensEstoqueDto itens = new ItensEstoqueDto(itensAlterada);
