@@ -29,6 +29,8 @@ public class ChamadoService {
 	private ClienteService clienteService;
 	@Autowired
 	private TecnicoService tecnicoService;
+	@Autowired
+	private PedidoEstoqueService pedidoEstoqueService;
 
 	public ChamadoDto findById(Integer id) {
 		Optional<Chamado> op = repository.findById(id);
@@ -83,6 +85,8 @@ public class ChamadoService {
 			pedido.setItensEstoque(itendto);
 			pedido.setQuantidadeSolicitada(itendto.getQuantidade());
 		});
+		
+		pedidoEstoqueService.create(pedido);
 		
 		return ch;
 	}
