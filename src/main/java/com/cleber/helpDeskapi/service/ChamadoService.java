@@ -2,11 +2,8 @@ package com.cleber.helpDeskapi.service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
@@ -37,10 +34,6 @@ public class ChamadoService {
 	private ClienteService clienteService;
 	@Autowired
 	private TecnicoService tecnicoService;
-	@Autowired
-	private PedidoEstoqueService pedidoEstoqueService;
-	@Autowired
-	private ItensEstoqueService itensEstoqueService;
 	@Autowired
 	private ItensEstoqueRepository itensEstoqueRepository;
 	@Autowired

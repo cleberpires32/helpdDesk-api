@@ -2,9 +2,7 @@ package com.cleber.helpDeskapi.dtos;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.validation.constraints.NotNull;
@@ -39,7 +37,6 @@ public class ChamadoDto implements Serializable {
 	@NotNull(message = "O campo Tecnico é requerido")
 	private Integer tecnico;
 	private String nomeTecnico;
-//	private List<ItensEstoque> itensEstoque = new ArrayList<>();
 	private Set<ItensEstoque> itensEstoque = new HashSet<>();
 
 	public ChamadoDto() {
@@ -76,7 +73,6 @@ public class ChamadoDto implements Serializable {
 		this.nomeCliente = ch.getCliente().getNome();
 		this.tecnico = ch.getTecnico().getId();
 		this.nomeTecnico = ch.getTecnico().getNome();
-		//this.itensEstoque = ch.getItensEstoque();
 	}
 
 	public Integer getId() {
@@ -166,15 +162,6 @@ public class ChamadoDto implements Serializable {
 	public void setNomeTecnico(String nomeTecnico) {
 		this.nomeTecnico = nomeTecnico;
 	}
-/*
-	public List<ItensEstoque> getItensEstoque() {
-		return this.itensEstoque;
-	}
-
-	public void setItensEstoque(List<ItensEstoque> itensEstoque) {
-		this.itensEstoque = itensEstoque;
-	}
-*/
 
 	public Set<ItensEstoque> getItensEstoque() {
 		return itensEstoque;
