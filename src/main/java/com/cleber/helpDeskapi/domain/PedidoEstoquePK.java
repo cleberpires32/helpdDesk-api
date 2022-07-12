@@ -24,4 +24,11 @@ public class PedidoEstoquePK implements Serializable{
 	public void setItensEstoqueId(Integer itensEstoqueId) {
 		this.itensEstoqueId = itensEstoqueId;
 	}
+	public PedidoEstoquePK() {
+	}
+	
+	public PedidoEstoquePK(Integer chamadoId, Integer itensEstoqueId) {
+		this.chamadoId = chamadoId;
+		this.itensEstoqueId = itensEstoqueId;
+	}
 }

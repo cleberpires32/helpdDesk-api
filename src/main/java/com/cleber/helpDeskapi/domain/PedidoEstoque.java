@@ -54,6 +54,14 @@ public class PedidoEstoque {
 	public void setItensEstoque(ItensEstoque itensEstoque) {
 		this.itensEstoque = itensEstoque;
 	}
+	
+	public PedidoEstoquePK getPk() {
+		return pk;
+	}
+
+	public void setPk(PedidoEstoquePK pk) {
+		this.pk = pk;
+	}
 
 	@Override
 	public int hashCode() {

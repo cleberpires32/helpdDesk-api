@@ -2,6 +2,8 @@ package com.cleber.helpDeskapi.service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -16,12 +18,14 @@ import com.cleber.helpDeskapi.domain.Chamado;
 import com.cleber.helpDeskapi.domain.Cliente;
 import com.cleber.helpDeskapi.domain.ItensEstoque;
 import com.cleber.helpDeskapi.domain.PedidoEstoque;
+import com.cleber.helpDeskapi.domain.PedidoEstoquePK;
 import com.cleber.helpDeskapi.domain.Tecnico;
 import com.cleber.helpDeskapi.domain.enums.Prioridade;
 import com.cleber.helpDeskapi.domain.enums.Status;
 import com.cleber.helpDeskapi.dtos.ChamadoDto;
 import com.cleber.helpDeskapi.repository.ChamadoRepository;
 import com.cleber.helpDeskapi.repository.ItensEstoqueRepository;
+import com.cleber.helpDeskapi.repository.PedidoEstoqueRepository;
 import com.cleber.helpDeskapi.service.exception.ObjectNotFoundException;
 
 @Service
@@ -39,6 +43,8 @@ public class ChamadoService {
 	private ItensEstoqueService itensEstoqueService;
 	@Autowired
 	private ItensEstoqueRepository itensEstoqueRepository;
+	@Autowired
+	private PedidoEstoqueRepository pedidoEstoqueRepository;
 
 	public ChamadoDto findById(Integer id) {
 		Optional<Chamado> op = repository.findById(id);
@@ -93,13 +99,13 @@ public class ChamadoService {
 		PedidoEstoque pedido = new PedidoEstoque();
 		if (dto.getId() != null) {
 			ch.setId(dto.getId());
-			pedido.setChamado(ch);
 			dto.getItensEstoque().stream().forEach(itendto -> {
+				pedido.setChamado(ch);
 				pedido.setItensEstoque(itendto);
 				pedido.setQuantidadeSolicitada(itendto.getQuantidadeSolicitada());
-			});
-			
-			pedidoEstoqueService.create(pedido);			
+				pedido.setPk(new PedidoEstoquePK());
+				pedidoEstoqueRepository.saveAndFlush(pedido);
+			});		
 			alteraQuantidadeEstoque(dto);
 		}
 	}
@@ -113,7 +119,6 @@ public class ChamadoService {
 				listaQuantidadeAlterada.add(itensBd.get());
 			}
 		});
-
 		itensEstoqueRepository.saveAll(listaQuantidadeAlterada);
 	}
 
