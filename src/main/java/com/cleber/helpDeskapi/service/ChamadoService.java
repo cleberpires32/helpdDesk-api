@@ -83,7 +83,7 @@ public class ChamadoService {
 		pedido.setChamado(ch);
 		dto.getItensEstoque().stream().forEach(itendto ->{
 			pedido.setItensEstoque(itendto);
-			pedido.setQuantidadeSolicitada(itendto.getQuantidade());
+			pedido.setQuantidadeSolicitada(itendto.getQuantidadeSolicitada());
 		});
 		
 		pedidoEstoqueService.create(pedido);

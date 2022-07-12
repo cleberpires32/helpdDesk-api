@@ -23,6 +23,8 @@ public class ItensEstoqueDto implements Serializable {
 	
 	private Boolean vinculoComChamado;
 	
+	private Integer quantidadeSolicitada;
+	
 	public ItensEstoqueDto() {}
 	
 	public ItensEstoqueDto(ItensEstoque itens) {
@@ -33,6 +35,7 @@ public class ItensEstoqueDto implements Serializable {
 		this.quantidade = itens.getQuantidade();
 		this.valor = itens.getValor();
 		this.vinculoComChamado = false;
+		this.quantidadeSolicitada = itens.getQuantidadeSolicitada();
 	}
 	
 	public Integer getId() {
@@ -72,6 +75,14 @@ public class ItensEstoqueDto implements Serializable {
 
 	public void setVinculoComChamado(Boolean vinculoComChamado) {
 		this.vinculoComChamado = vinculoComChamado;
+	}
+
+	public Integer getQuantidadeSolicitada() {
+		return quantidadeSolicitada;
+	}
+
+	public void setQuantidadeSolicitada(Integer quantidadeSolicitada) {
+		this.quantidadeSolicitada = quantidadeSolicitada;
 	}
 
 }

@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 import com.cleber.helpDeskapi.dtos.ItensEstoqueDto;
 
@@ -28,6 +29,9 @@ public class ItensEstoque implements Serializable{
 	private BigDecimal valor;
 	@Column
 	private Integer quantidade;
+	
+	@Transient
+	private Integer quantidadeSolicitada;
 
 	public ItensEstoque() {
 	}
@@ -88,6 +92,14 @@ public class ItensEstoque implements Serializable{
 
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
+	}
+	
+	public Integer getQuantidadeSolicitada() {
+		return quantidadeSolicitada;
+	}
+
+	public void setQuantidadeSolicitada(Integer quantidadeSolicitada) {
+		this.quantidadeSolicitada = quantidadeSolicitada;
 	}
 
 	@Override
