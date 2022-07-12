@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,5 +40,12 @@ public class ItensEstoqueResource {
 		List<ItensEstoque> listaEstoque  = itensService.findAll();
 		List<ItensEstoqueDto> listDto = listaEstoque.stream().map(estoque -> new ItensEstoqueDto(estoque)).collect(Collectors.toList());
 	return ResponseEntity.ok().body(listDto);
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<ItensEstoqueDto> findById(@PathVariable Integer id){
+		ItensEstoque iten= itensService.findById(id);
+		ItensEstoqueDto dto = new ItensEstoqueDto(iten);
+		return ResponseEntity.ok().body(dto);
 	}
 }
