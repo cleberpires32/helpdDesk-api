@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 public class PedidoEstoque {
 
 	@EmbeddedId
-	private PedidoEstoquePK pk;
+	private PedidoEstoquePK pk = new PedidoEstoquePK();
 	
 	@MapsId("chamadoId")
     @ManyToOne
