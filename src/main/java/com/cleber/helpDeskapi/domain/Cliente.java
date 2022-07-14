@@ -24,8 +24,8 @@ public class Cliente extends Pessoa{
 		addPerfil(Perfil.CLIENTE);
 	}
 
-	public Cliente(Integer id, String nome, String email, String cpf, String senha) {
-		super(id, nome, email, cpf, senha);
+	public Cliente(Integer id, String nome, String email, String cpf, String telefone, String senha) {
+		super(id, nome, email, cpf, telefone, senha);
 		addPerfil(Perfil.CLIENTE);
 	}
 
@@ -43,5 +43,6 @@ public class Cliente extends Pessoa{
 		this.email = dto.getEmail();
 		this.cpf = dto.getCpf();
 		this.senha = dto.getSenha();
+		this.telefone = dto.getTelefone();
 	}
 }

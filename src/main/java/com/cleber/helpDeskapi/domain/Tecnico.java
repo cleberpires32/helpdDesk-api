@@ -24,8 +24,8 @@ public class Tecnico extends Pessoa {
 		addPerfil(Perfil.CLIENTE);
 	}
 
-	public Tecnico(Integer id, String nome, String email, String cpf, String senha) {
-		super(id, nome, email, cpf, senha);
+	public Tecnico(Integer id, String nome, String email, String cpf, String telefone, String senha) {
+		super(id, nome, email, cpf, telefone, senha);
 		addPerfil(Perfil.CLIENTE);
 	}
 
@@ -42,6 +42,7 @@ public class Tecnico extends Pessoa {
 		this.nome = dto.getNome();
 		this.email = dto.getEmail();
 		this.cpf = dto.getCpf();
+		this.telefone = dto.getTelefone();
 		this.senha = dto.getSenha();
 		dto.getPerfis().forEach(f ->{
 			this.addPerfil(f);

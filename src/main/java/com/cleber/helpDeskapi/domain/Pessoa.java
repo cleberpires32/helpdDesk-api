@@ -36,6 +36,8 @@ public abstract class Pessoa implements Serializable{
 	@CPF
 	@Column(unique = true)
 	protected String cpf;
+	@Column
+	protected String telefone;
 	protected String senha;
 	
 	@ElementCollection(fetch = FetchType.EAGER)//anotacion que garante ler o perfil sempre que chamar a classe Pessoa
@@ -50,12 +52,13 @@ public abstract class Pessoa implements Serializable{
 		addPerfil(Perfil.CLIENTE);
 	}
 	
-	public Pessoa(Integer id, String nome, String email, String cpf, String senha) {
+	public Pessoa(Integer id, String nome, String email, String cpf,String telefone, String senha) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.cpf = cpf;
+		this.telefone = telefone;
 		this.senha = senha;
 		addPerfil(Perfil.CLIENTE);
 	}
@@ -84,6 +87,14 @@ public abstract class Pessoa implements Serializable{
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
 	public String getSenha() {
 		return senha;
 	}

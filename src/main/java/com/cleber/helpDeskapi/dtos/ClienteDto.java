@@ -23,6 +23,7 @@ public class ClienteDto implements Serializable{
 	protected String email;
 	@NotNull
 	protected String cpf;
+	protected String telefone;
 	protected String senha;
 	protected Set<Integer> perfis = new HashSet<>();
 	@JsonIgnore
@@ -39,6 +40,7 @@ public class ClienteDto implements Serializable{
 		this.nome = cli.getNome();
 		this.email = cli.getEmail();
 		this.cpf = cli.getCpf();
+		this.telefone = cli.getTelefone();
 		this.senha = cli.getSenha();
 		this.perfis = cli.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
 		this.dataCriacao = cli.getDataCriacao();
@@ -82,6 +84,16 @@ public class ClienteDto implements Serializable{
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
 	}
 
 
