@@ -10,6 +10,7 @@ import javax.validation.constraints.NotNull;
 
 import com.cleber.helpDeskapi.domain.Cliente;
 import com.cleber.helpDeskapi.domain.enums.Perfil;
+import com.cleber.helpDeskapi.service.util.Utils;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -40,7 +41,7 @@ public class ClienteDto implements Serializable{
 		this.nome = cli.getNome();
 		this.email = cli.getEmail();
 		this.cpf = cli.getCpf();
-		this.telefone = cli.getTelefone();
+		this.telefone =  Utils.formatString(cli.getTelefone(),"(##) #-####-####");
 		this.senha = cli.getSenha();
 		this.perfis = cli.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
 		this.dataCriacao = cli.getDataCriacao();
