@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,22 +23,24 @@ import com.cleber.helpDeskapi.domain.enums.Status;
 import com.cleber.helpDeskapi.dtos.ChamadoDto;
 import com.cleber.helpDeskapi.repository.ChamadoRepository;
 import com.cleber.helpDeskapi.repository.ItensEstoqueRepository;
-import com.cleber.helpDeskapi.repository.PedidoEstoqueRepository;
 import com.cleber.helpDeskapi.service.exception.ObjectNotFoundException;
+import com.cleber.helpDeskapi.service.exception.SQLIntegrityConstraintViolationException;
 
 @Service
 public class ChamadoService {
 
 	@Autowired
-	private ChamadoRepository repository;
-	@Autowired
 	private ClienteService clienteService;
 	@Autowired
 	private TecnicoService tecnicoService;
 	@Autowired
-	private ItensEstoqueRepository itensEstoqueRepository;
+	private PedidoEstoqueService pedidoEstoqueService;
+
 	@Autowired
-	private PedidoEstoqueRepository pedidoEstoqueRepository;
+	private ChamadoRepository repository;
+	@Autowired
+	private ItensEstoqueRepository itensEstoqueRepository;
+
 
 	public ChamadoDto findById(Integer id) {
 		Optional<Chamado> op = repository.findById(id);
@@ -88,6 +91,7 @@ public class ChamadoService {
 		return ch;
 	}
 
+	@Transactional
 	private void toUpdate(ChamadoDto dto, Chamado ch) {
 		PedidoEstoque pedido = new PedidoEstoque();
 		if (dto.getId() != null) {
@@ -97,12 +101,16 @@ public class ChamadoService {
 				pedido.setItensEstoque(itendto);
 				pedido.setQuantidadeSolicitada(itendto.getQuantidadeSolicitada());
 				pedido.setPk(new PedidoEstoquePK());
-				pedidoEstoqueRepository.saveAndFlush(pedido);
-			});		
+				try {
+					pedidoEstoqueService.saveAndFlush(pedido);
+				} catch (Exception e) {
+					 throw new SQLIntegrityConstraintViolationException("Violação de dados", e.getCause());
+				}
+			});
 			alteraQuantidadeEstoque(dto);
 		}
 	}
-	
+
 	private void alteraQuantidadeEstoque(ChamadoDto chamadoDto) {
 		List<ItensEstoque> listaQuantidadeAlterada = new ArrayList<>();
 		chamadoDto.getItensEstoque().stream().forEach(iDto -> {

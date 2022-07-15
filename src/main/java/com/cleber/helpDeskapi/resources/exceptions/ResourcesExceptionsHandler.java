@@ -1,5 +1,6 @@
 package com.cleber.helpDeskapi.resources.exceptions;
 
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.cleber.helpDeskapi.service.exception.ConstraintViolationException;
 import com.cleber.helpDeskapi.service.exception.DataIntegrityViolationException;
 import com.cleber.helpDeskapi.service.exception.ObjectNotFoundException;
+import com.cleber.helpDeskapi.service.exception.SQLIntegrityConstraintViolationException;
 
 @ControllerAdvice
 public class ResourcesExceptionsHandler {
@@ -30,6 +32,16 @@ public class ResourcesExceptionsHandler {
 
 		StanderError error = new StanderError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(),
 				"Violação de dados", ex.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+	}
+	
+	
+	@ExceptionHandler(SQLIntegrityConstraintViolationException.class)
+	public ResponseEntity<StanderError> sqlIntegrityDuplicateConstraintViolationException(SQLIntegrityConstraintViolationException ex,
+			HttpServletRequest request) {
+
+		StanderError error = new StanderError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(),
+				"Violação de dados, duplicação de itens para o mesmo chamado", ex.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
 	}
 
