@@ -1,5 +1,6 @@
 package com.cleber.helpDeskapi.service;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +9,14 @@ import org.springframework.stereotype.Service;
 
 import com.cleber.helpDeskapi.domain.Chamado;
 import com.cleber.helpDeskapi.domain.Cliente;
+import com.cleber.helpDeskapi.domain.ItensEstoque;
 import com.cleber.helpDeskapi.domain.Tecnico;
 import com.cleber.helpDeskapi.domain.enums.Perfil;
 import com.cleber.helpDeskapi.domain.enums.Prioridade;
 import com.cleber.helpDeskapi.domain.enums.Status;
 import com.cleber.helpDeskapi.repository.ChamadoRepository;
 import com.cleber.helpDeskapi.repository.ClienteRepository;
+import com.cleber.helpDeskapi.repository.ItensEstoqueRepository;
 import com.cleber.helpDeskapi.repository.TecnicoRepository;
 
 @Service
@@ -25,6 +28,8 @@ public class DbService {
 	private ClienteRepository clienteRepository;
 	@Autowired
 	private ChamadoRepository chamadoRepository;
+	@Autowired
+	private ItensEstoqueRepository itensEstoqueRepository;
 	
 	@Autowired
 	private BCryptPasswordEncoder encode;
@@ -44,6 +49,9 @@ public class DbService {
 		Chamado ch3 = new Chamado(null, "Terceira carga", "Chamado 3", Prioridade.BAIXA, Status.CANCELADO, tc2, cl2);
 		Chamado ch4 = new Chamado(null, "Terceira carga", "Chamado 4", Prioridade.BAIXA, Status.ENCERRADO, tc2, cl2);
 	
+		ItensEstoque est = new ItensEstoque(null, "Carburador Still 55c", "234D3", BigDecimal.TEN,2);
+		
+		itensEstoqueRepository.save(est);
 		tecnicoRepository.saveAll(Arrays.asList(tc1,tc2,tc3,tc4));
 		clienteRepository.saveAll(Arrays.asList(cl1,cl2));
 		chamadoRepository.saveAll(Arrays.asList(ch1,ch2,ch3,ch4));

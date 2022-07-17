@@ -1,7 +1,6 @@
 package com.cleber.helpDeskapi.repository;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -23,5 +22,9 @@ public interface PedidoEstoqueRepository extends JpaRepository<PedidoEstoque, In
 	@Modifying
 	@Query(value = "DELETE FROM PedidoEstoque p WHERE p.chamado.id = :chamadoId and p.itensEstoque.id IN :itensPedidos")
 	public void remover(@Param("chamadoId") Integer chamadoId, @Param("itensPedidos") Collection<Integer> itensPedidos);
- 
+
+	@Modifying
+	@Query(value = "SELECT p FROM PedidoEstoque p WHERE p.itensEstoque.id IN :itensPedidos")
+	public List<PedidoEstoque> findByAllQuery(@Param("itensPedidos") Collection<Integer> itensPedidos);
+
 }
