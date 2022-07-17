@@ -5,10 +5,10 @@ import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
-import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class PedidoEstoque {
@@ -22,7 +22,7 @@ public class PedidoEstoque {
 	private Chamado chamado;
 	
 	@MapsId("itensEstoqueId")
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "itensEstoqueId", referencedColumnName = "id")
 	private ItensEstoque itensEstoque = new ItensEstoque();
 	

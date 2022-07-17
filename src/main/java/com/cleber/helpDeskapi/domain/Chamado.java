@@ -8,6 +8,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -48,7 +49,7 @@ public class Chamado implements Serializable{
 	inverseJoinColumns = @JoinColumn(name = "itensEstoque_id"))
 	private List<ItensEstoque> itensEstoque = new ArrayList<>();
 */
-	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "chamado")
+	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "chamado", fetch = FetchType.LAZY)
 	private Set<PedidoEstoque> pedidoEstoque = new HashSet<>();
 	
 	public Chamado() {}

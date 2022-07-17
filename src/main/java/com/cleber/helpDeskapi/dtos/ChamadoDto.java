@@ -73,6 +73,9 @@ public class ChamadoDto implements Serializable {
 		this.nomeCliente = ch.getCliente().getNome();
 		this.tecnico = ch.getTecnico().getId();
 		this.nomeTecnico = ch.getTecnico().getNome();
+		ch.getPedidoEstoque().forEach(i ->{
+			this.itensEstoque.add(i.getItensEstoque());
+		});
 	}
 
 	public Integer getId() {
