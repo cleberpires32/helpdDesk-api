@@ -1,5 +1,8 @@
 package com.cleber.helpDeskapi.service;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +24,11 @@ public class PedidoEstoqueService {
 	@Transactional
 	public void saveAndFlush(PedidoEstoque pedido) {
 		repository.saveAndFlush(pedido);
+	}
+
+	@Transactional
+	public void delete(Integer chamadoId, Integer[] itensPedidos) {
+		List<Integer> itens = Arrays.asList(itensPedidos);
+		repository.remover(chamadoId, itens);
 	}
 }
