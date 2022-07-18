@@ -52,7 +52,7 @@ public class PedidoEstoqueService {
 			for (PedidoEstoque pedido : pedidos) {
 				if (itensEstoque.getId() == pedido.getItensEstoque().getId()) {
 					itensEstoque.setQuantidade(
-							pedido.getItensEstoque().getQuantidade() + 
+							pedido.getQuantidadeSolicitada() + 
 							itensEstoque.getQuantidade());
 				}
 			}
