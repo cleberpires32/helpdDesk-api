@@ -41,11 +41,19 @@ public class ChamadoService {
 	@Autowired
 	private ItensEstoqueRepository itensEstoqueRepository;
 
-
 	public ChamadoDto findById(Integer id) {
 		Optional<Chamado> op = repository.findById(id);
+		atualizarQtSolicitada(op);
 		op.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado com id: " + id));
 		return new ChamadoDto(op.get());
+	}
+
+	private void atualizarQtSolicitada(Optional<Chamado> op) {
+		if (!op.get().getPedidoEstoque().isEmpty()) {
+			op.get().getPedidoEstoque().forEach(p ->{
+				p.getItensEstoque().setQuantidadeSolicitada(p.getQuantidadeSolicitada());
+			});
+		}
 	}
 
 	public List<ChamadoDto> findByAll() {
@@ -104,7 +112,7 @@ public class ChamadoService {
 				try {
 					pedidoEstoqueService.saveAndFlush(pedido);
 				} catch (Exception e) {
-					 throw new SQLIntegrityConstraintViolationException("Violação de dados", e.getCause());
+					throw new SQLIntegrityConstraintViolationException("Violação de dados", e.getCause());
 				}
 			});
 			alteraQuantidadeEstoque(dto);

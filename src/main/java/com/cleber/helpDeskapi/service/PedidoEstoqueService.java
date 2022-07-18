@@ -60,4 +60,8 @@ public class PedidoEstoqueService {
 
 		itensEstoqueRepository.saveAll(alteraItens);
 	}
+	
+	public List<PedidoEstoque> pedidosEstoquesPorChamado(Integer Id){
+		return repository.findByAllporChamado(Id);
+	}
 }

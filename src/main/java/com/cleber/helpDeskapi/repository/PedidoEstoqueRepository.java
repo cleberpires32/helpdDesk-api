@@ -27,4 +27,8 @@ public interface PedidoEstoqueRepository extends JpaRepository<PedidoEstoque, In
 	@Query(value = "SELECT p FROM PedidoEstoque p WHERE p.itensEstoque.id IN :itensPedidos")
 	public List<PedidoEstoque> findByAllQuery(@Param("itensPedidos") Collection<Integer> itensPedidos);
 
+	@Modifying
+	@Query(value = "SELECT p FROM PedidoEstoque p WHERE p.chamado.id = :idChamado")
+	public List<PedidoEstoque> findByAllporChamado(@Param("idChamado") Integer idChamado);
+
 }

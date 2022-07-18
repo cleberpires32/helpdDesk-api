@@ -1,5 +1,6 @@
 package com.cleber.helpDeskapi.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -11,7 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 
 @Entity
-public class PedidoEstoque {
+public class PedidoEstoque implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
 	private PedidoEstoquePK pk = new PedidoEstoquePK();

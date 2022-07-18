@@ -3,14 +3,12 @@ package com.cleber.helpDeskapi.dtos;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.Set;import java.util.stream.Collector;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 import javax.validation.constraints.NotNull;
 
 import com.cleber.helpDeskapi.domain.Chamado;
 import com.cleber.helpDeskapi.domain.ItensEstoque;
-import com.cleber.helpDeskapi.domain.PedidoEstoque;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -40,7 +38,6 @@ public class ChamadoDto implements Serializable {
 	private Integer tecnico;
 	private String nomeTecnico;
 	private Set<ItensEstoque> itensEstoque = new HashSet<>();
-	private Set<PedidoEstoque> pedidoEstoque = new HashSet<>();
 
 	public ChamadoDto() {
 		super();
@@ -76,7 +73,6 @@ public class ChamadoDto implements Serializable {
 		this.nomeCliente = ch.getCliente().getNome();
 		this.tecnico = ch.getTecnico().getId();
 		this.nomeTecnico = ch.getTecnico().getNome();
-		this.pedidoEstoque  = ch.getPedidoEstoque();
 		ch.getPedidoEstoque().forEach(i ->{
 			this.itensEstoque.add(i.getItensEstoque());
 		});
@@ -178,11 +174,4 @@ public class ChamadoDto implements Serializable {
 		this.itensEstoque = itensEstoque;
 	}
 
-	public Set<PedidoEstoque> getPedidoEstoque() {
-		return pedidoEstoque;
-	}
-
-	public void setPedidoEstoque(Set<PedidoEstoque> pedidoEstoque) {
-		this.pedidoEstoque = pedidoEstoque;
-	}
 }
