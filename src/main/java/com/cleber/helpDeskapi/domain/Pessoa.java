@@ -15,6 +15,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -30,10 +31,12 @@ public abstract class Pessoa implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Integer id;
+	@NotBlank
 	protected String nome;
 	@Column(unique = true)
 	protected String email;
 	@CPF
+	@NotBlank
 	@Column(unique = true)
 	protected String cpf;
 	@Column

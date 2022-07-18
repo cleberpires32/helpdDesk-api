@@ -48,7 +48,7 @@ public class ClienteResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<ClienteDto> create(@Valid @RequestBody ClienteDto tecDto) {
+	public ResponseEntity<ClienteDto> create(@RequestBody ClienteDto tecDto) {
 		Cliente Cliente = service.create(tecDto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(Cliente.getId())
 				.toUri();
@@ -58,7 +58,7 @@ public class ClienteResource {
 
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<ClienteDto> update(@PathVariable Integer id, 
-			@Validated @RequestBody ClienteDto objDto){
+			@Valid @RequestBody ClienteDto objDto){
 		Cliente tec = service.update(id, objDto);
 		return ResponseEntity.ok().body(new ClienteDto(tec));
 	}
