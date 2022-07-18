@@ -52,6 +52,7 @@ public class ItensEstoque implements Serializable{
 		this.codigo = itens.getCodigo();
 		this.quantidade = itens.getQuantidade();
 		this.valor = itens.getValor();
+		this.setQuantidadeSolicitada(itens.getQuantidadeSolicitada());
 	}
 		
 	public Integer getId() {
