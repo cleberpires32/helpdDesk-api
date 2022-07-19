@@ -38,30 +38,29 @@ public class PedidoEstoqueService {
 
 		repository.remover(chamadoId, itens);
 
-		retornaQtItensToEstoque(itens, pedidosEstoqueRecolhido);
+		retornaQtItensToEstoque(chamadoId, itens, pedidosEstoqueRecolhido);
 	}
 
 	private List<PedidoEstoque> recolhePedidosEstoque(List<Integer> itens) {
 		return repository.findByAllQuery(itens);
 	}
 
-	private void retornaQtItensToEstoque(List<Integer> idsItens, List<PedidoEstoque> pedidos) {
+	private void retornaQtItensToEstoque(Integer chamadoId, List<Integer> idsItens, List<PedidoEstoque> pedidos) {
 
 		List<ItensEstoque> alteraItens = itensEstoqueRepository.findAllById(idsItens);
 		for (ItensEstoque itensEstoque : alteraItens) {
 			for (PedidoEstoque pedido : pedidos) {
-				if (itensEstoque.getId() == pedido.getItensEstoque().getId()) {
-					itensEstoque.setQuantidade(
-							pedido.getQuantidadeSolicitada() + 
-							itensEstoque.getQuantidade());
+				if (itensEstoque.getId() == pedido.getItensEstoque().getId()
+						&& pedido.getChamado().getId() == chamadoId) {
+					itensEstoque.setQuantidade(pedido.getQuantidadeSolicitada() + itensEstoque.getQuantidade());
 				}
 			}
 		}
 
 		itensEstoqueRepository.saveAll(alteraItens);
 	}
-	
-	public List<PedidoEstoque> pedidosEstoquesPorChamado(Integer Id){
+
+	public List<PedidoEstoque> pedidosEstoquesPorChamado(Integer Id) {
 		return repository.findByAllporChamado(Id);
 	}
 }

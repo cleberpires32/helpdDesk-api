@@ -20,7 +20,6 @@ public class ClienteDto implements Serializable{
 	protected Integer id;
 	@NotNull
 	protected String nome;
-	@NotNull
 	protected String email;
 	@NotNull
 	protected String cpf;
