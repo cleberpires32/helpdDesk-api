@@ -52,6 +52,9 @@ public class Chamado implements Serializable{
 	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "chamado", fetch = FetchType.LAZY)
 	private Set<PedidoEstoque> pedidoEstoque = new HashSet<>();
 	
+	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "chamado", fetch = FetchType.LAZY)
+	private Set<Servico> servicos = new HashSet<>();
+	
 	public Chamado() {}
 
 	public Chamado(Integer id, String titulo, String observacoes, Prioridade prioridade, Status status, Tecnico tecnico,
