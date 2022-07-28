@@ -2,7 +2,9 @@ package com.cleber.helpDeskapi.domain;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -13,6 +15,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -43,17 +47,14 @@ public class Chamado implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "tecnico_id")
 	private Tecnico tecnico;
-/*	
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "pedido_estoque",joinColumns = @JoinColumn(name = "chamado_id"),
-	inverseJoinColumns = @JoinColumn(name = "itensEstoque_id"))
-	private List<ItensEstoque> itensEstoque = new ArrayList<>();
-*/
+	
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "servicoChamado",joinColumns = @JoinColumn(name = "chamadoId"),
+	inverseJoinColumns = @JoinColumn(name = "servicoId"))
+	private List<Servico> servicos = new ArrayList<>();
+
 	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "chamado", fetch = FetchType.LAZY)
 	private Set<PedidoEstoque> pedidoEstoque = new HashSet<>();
-	
-	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "chamado", fetch = FetchType.LAZY)
-	private Set<Servico> servicos = new HashSet<>();
 	
 	public Chamado() {}
 
@@ -156,6 +157,14 @@ public class Chamado implements Serializable{
 
 	public void setPedidoEstoque(Set<PedidoEstoque> pedidoEstoque) {
 		this.pedidoEstoque = pedidoEstoque;
+	}
+
+	public List<Servico> getServicos() {
+		return servicos;
+	}
+
+	public void setServicos(List<Servico> servicos) {
+		this.servicos = servicos;
 	}
 
 	@Override

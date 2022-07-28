@@ -9,9 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
+
+import com.cleber.helpDeskapi.dtos.ServicoDto;
 
 @Entity
 public class Servico implements Serializable{
@@ -25,22 +25,23 @@ public class Servico implements Serializable{
 	@NotBlank
 	private String descricao;
 	@Column
-	@NotBlank
 	private BigDecimal valor;
-	@ManyToOne
-	@JoinColumn(name = "chamado_id")
-	private Chamado chamado;
 	
 	public Servico() {}
 	
-	public Servico(Integer id, String descricao, BigDecimal valor, Chamado chamado) {
+	public Servico(Integer id, String descricao, BigDecimal valor) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
 		this.valor = valor;
-		this.chamado = chamado;
 	}
 
+	public Servico(ServicoDto dto) {
+		super();
+		this.id = dto.getId();
+		this.descricao = dto.getDescricao();
+		this.valor = dto.getValor();
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -60,14 +61,6 @@ public class Servico implements Serializable{
 		this.valor = valor;
 	}
 	
-	public Chamado getChamado() {
-		return chamado;
-	}
-
-	public void setChamado(Chamado chamado) {
-		this.chamado = chamado;
-	}
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

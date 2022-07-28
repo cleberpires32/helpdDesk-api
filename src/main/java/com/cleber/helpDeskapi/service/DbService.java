@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.cleber.helpDeskapi.domain.Chamado;
 import com.cleber.helpDeskapi.domain.Cliente;
 import com.cleber.helpDeskapi.domain.ItensEstoque;
+import com.cleber.helpDeskapi.domain.Servico;
 import com.cleber.helpDeskapi.domain.Tecnico;
 import com.cleber.helpDeskapi.domain.enums.Perfil;
 import com.cleber.helpDeskapi.domain.enums.Prioridade;
@@ -17,6 +18,7 @@ import com.cleber.helpDeskapi.domain.enums.Status;
 import com.cleber.helpDeskapi.repository.ChamadoRepository;
 import com.cleber.helpDeskapi.repository.ClienteRepository;
 import com.cleber.helpDeskapi.repository.ItensEstoqueRepository;
+import com.cleber.helpDeskapi.repository.ServicoRepository;
 import com.cleber.helpDeskapi.repository.TecnicoRepository;
 
 @Service
@@ -30,6 +32,8 @@ public class DbService {
 	private ChamadoRepository chamadoRepository;
 	@Autowired
 	private ItensEstoqueRepository itensEstoqueRepository;
+	@Autowired
+	private ServicoRepository servicoRepository;
 	
 	@Autowired
 	private BCryptPasswordEncoder encode;
@@ -57,6 +61,10 @@ public class DbService {
 		tecnicoRepository.saveAll(Arrays.asList(tc1));
 		clienteRepository.saveAll(Arrays.asList(cl1,cl2));
 		chamadoRepository.saveAll(Arrays.asList(ch1,ch2,ch3,ch4));
+		
+		Servico s1 = new Servico(null,"Limpleza e regulagem do carburador", BigDecimal.TEN);
+		Servico s2 = new Servico(null,"Mão de Obra Geral", BigDecimal.TEN);
+		servicoRepository.saveAll(Arrays.asList(s1,s2));
 		
 	}
 	

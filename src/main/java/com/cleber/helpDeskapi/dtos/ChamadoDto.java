@@ -2,13 +2,16 @@ package com.cleber.helpDeskapi.dtos;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.constraints.NotNull;
 
 import com.cleber.helpDeskapi.domain.Chamado;
 import com.cleber.helpDeskapi.domain.ItensEstoque;
+import com.cleber.helpDeskapi.domain.Servico;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -38,6 +41,7 @@ public class ChamadoDto implements Serializable {
 	private Integer tecnico;
 	private String nomeTecnico;
 	private Set<ItensEstoque> itensEstoque = new HashSet<>();
+	private List<Servico> servicos = new ArrayList<>();
 
 	public ChamadoDto() {
 		super();
@@ -45,7 +49,7 @@ public class ChamadoDto implements Serializable {
 
 	public ChamadoDto(Integer id, LocalDateTime dataAbertura, LocalDateTime dataFechamento, Integer status,
 			Integer prioridade, String titulo, String observacoes, Integer cliente, String nomeCliente, Integer tecnico,
-			String nomeTecnico) {
+			String nomeTecnico, List<Servico> servicos) {
 		super();
 		this.id = id;
 		this.dataAbertura = dataAbertura;
@@ -58,6 +62,7 @@ public class ChamadoDto implements Serializable {
 		this.nomeCliente = nomeCliente;
 		this.tecnico = tecnico;
 		this.nomeTecnico = nomeTecnico;
+		this.servicos.addAll(servicos);
 	}
 
 	public ChamadoDto(Chamado ch) {
@@ -76,6 +81,8 @@ public class ChamadoDto implements Serializable {
 		ch.getPedidoEstoque().forEach(i ->{
 			this.itensEstoque.add(i.getItensEstoque());
 		});
+		this.servicos.addAll(ch.getServicos());
+		
 	}
 
 	public Integer getId() {
@@ -172,6 +179,14 @@ public class ChamadoDto implements Serializable {
 
 	public void setItensEstoque(Set<ItensEstoque> itensEstoque) {
 		this.itensEstoque = itensEstoque;
+	}
+
+	public List<Servico> getServicos() {
+		return servicos;
+	}
+
+	public void setServicos(List<Servico> servicos) {
+		this.servicos = servicos;
 	}
 
 }

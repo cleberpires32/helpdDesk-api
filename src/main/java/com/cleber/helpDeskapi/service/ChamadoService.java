@@ -93,6 +93,7 @@ public class ChamadoService {
 		ch.setObservacoes(dto.getObservacoes());
 		ch.setCliente(cliente);
 		ch.setTecnico(tecnico);
+		ch.setServicos(dto.getServicos());
 
 		toUpdate(dto, ch);
 
