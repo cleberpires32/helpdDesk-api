@@ -90,6 +90,7 @@ public class ChamadoService {
 		ch.setStatus(Status.toEnum(dto.getStatus()));
 		ch.setPrioridade(Prioridade.toEnum(dto.getPrioridade()));
 		ch.setTitulo(dto.getTitulo());
+		ch.setModelo(dto.getModelo());
 		ch.setObservacoes(dto.getObservacoes());
 		ch.setCliente(cliente);
 		ch.setTecnico(tecnico);
@@ -109,8 +110,10 @@ public class ChamadoService {
 				pedido.setChamado(ch);
 				pedido.setItensEstoque(itendto);
 				pedido.setQuantidadeSolicitada(itendto.getQuantidadeSolicitada());
-				pedido.setPk(new PedidoEstoquePK());
+				pedido.getPk().setChamadoId(ch.getId());
+				pedido.getPk().setItensEstoqueId(itendto.getId());
 				try {
+						//pedido.setPk(new PedidoEstoquePK());
 					pedidoEstoqueService.saveAndFlush(pedido);
 				} catch (Exception e) {
 					throw new SQLIntegrityConstraintViolationException("Violação de dados", e.getCause());

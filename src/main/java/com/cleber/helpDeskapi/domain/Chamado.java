@@ -38,6 +38,7 @@ public class Chamado implements Serializable{
 	private Status status;
 	private Prioridade prioridade;
 	private String titulo;
+	private String modelo;
 	private String observacoes;
 
 	@ManyToOne
@@ -58,11 +59,12 @@ public class Chamado implements Serializable{
 	
 	public Chamado() {}
 
-	public Chamado(Integer id, String titulo, String observacoes, Prioridade prioridade, Status status, Tecnico tecnico,
+	public Chamado(Integer id, String titulo, String modelo, String observacoes, Prioridade prioridade, Status status, Tecnico tecnico,
 			Cliente cliente) {
 
 		this.id = id;
 		this.titulo = titulo;
+		this.modelo = modelo;
 		this.observacoes = observacoes;
 		this.status = status;
 		this.prioridade = prioridade;
@@ -100,6 +102,14 @@ public class Chamado implements Serializable{
 
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
+	}
+
+	public String getModelo() {
+		return modelo;
+	}
+
+	public void setModelo(String modelo) {
+		this.modelo = modelo;
 	}
 
 	public String getObservacoes() {
