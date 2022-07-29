@@ -51,4 +51,5 @@ public class ChamadoResource {
 		ChamadoDto chamadoDto = service.update(id, dto);
 		return ResponseEntity.ok().body(chamadoDto);
 	}
+	
 }

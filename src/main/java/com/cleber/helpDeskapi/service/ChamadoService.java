@@ -50,7 +50,7 @@ public class ChamadoService {
 
 	private void atualizarQtSolicitada(Optional<Chamado> op) {
 		if (!op.get().getPedidoEstoque().isEmpty()) {
-			op.get().getPedidoEstoque().forEach(p ->{
+			op.get().getPedidoEstoque().forEach(p -> {
 				p.getItensEstoque().setQuantidadeSolicitada(p.getQuantidadeSolicitada());
 			});
 		}
