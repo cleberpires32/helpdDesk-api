@@ -16,7 +16,6 @@ import com.cleber.helpDeskapi.domain.Chamado;
 import com.cleber.helpDeskapi.domain.Cliente;
 import com.cleber.helpDeskapi.domain.ItensEstoque;
 import com.cleber.helpDeskapi.domain.PedidoEstoque;
-import com.cleber.helpDeskapi.domain.PedidoEstoquePK;
 import com.cleber.helpDeskapi.domain.Tecnico;
 import com.cleber.helpDeskapi.domain.enums.Prioridade;
 import com.cleber.helpDeskapi.domain.enums.Status;
@@ -91,6 +90,7 @@ public class ChamadoService {
 		ch.setPrioridade(Prioridade.toEnum(dto.getPrioridade()));
 		ch.setTitulo(dto.getTitulo());
 		ch.setModelo(dto.getModelo());
+		ch.setRecibo(dto.getRecibo());
 		ch.setObservacoes(dto.getObservacoes());
 		ch.setCliente(cliente);
 		ch.setTecnico(tecnico);

@@ -49,10 +49,10 @@ public class DbService {
 		Cliente cl1 = new Cliente(null, "Sidney Alves", "sidney@gmail.com", "54811402090", "61991587610", encode.encode("12345"));
 		Cliente cl2 = new Cliente(null, "Alberto Duran", "alberto@gmail.com", "64546306172", "61991587610", encode.encode("12345"));
 		
-		Chamado ch1 = new Chamado(null,  "Roçadeira Still","vulcan c55","Primeira carga", Prioridade.MEDIA, Status.ANDAMENTO, tc1, cl1);
-		Chamado ch2 = new Chamado(null,  "Cortador de grama 2","yanamn rd" ,"Segunda carga", Prioridade.ALTA, Status.ABERTO, tc3, cl1);
-		Chamado ch3 = new Chamado(null,  "Motor serra","ct 250", "Terceira carga", Prioridade.BAIXA, Status.CANCELADO, tc2, cl2);
-		Chamado ch4 = new Chamado(null,  "Soprador de folha","Trapp 27", "Terceira carga", Prioridade.BAIXA, Status.ENCERRADO, tc2, cl2);
+		Chamado ch1 = new Chamado(null,  "Roçadeira Still","vulcan c55","586","Primeira carga", Prioridade.MEDIA, Status.ANDAMENTO, tc1, cl1);
+		Chamado ch2 = new Chamado(null,  "Cortador de grama 2","yanamn rd" ,"587","Segunda carga", Prioridade.ALTA, Status.ABERTO, tc3, cl1);
+		Chamado ch3 = new Chamado(null,  "Motor serra","ct 250","588", "Terceira carga", Prioridade.BAIXA, Status.CANCELADO, tc2, cl2);
+		Chamado ch4 = new Chamado(null,  "Soprador de folha","Trapp 27","588", "Terceira carga", Prioridade.BAIXA, Status.ENCERRADO, tc2, cl2);
 	
 		ItensEstoque est = new ItensEstoque(null, "Carburador Still 55c", "234D3", BigDecimal.TEN,2);
 		ItensEstoque est2 = new ItensEstoque(null, "Corrente de motoserra Still 55c", "234D3", BigDecimal.ONE,2);
