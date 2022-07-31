@@ -36,6 +36,7 @@ public class ChamadoDto implements Serializable {
 	private String modelo;
 	@NotNull(message = "O campo Observação é requerido")
 	private String observacoes;
+	private String telefoneCliente;
 	@NotNull(message = "O campo Cliente é requerido")
 	private Integer cliente;
 	private String nomeCliente;
@@ -50,7 +51,7 @@ public class ChamadoDto implements Serializable {
 	}
 
 	public ChamadoDto(Integer id, LocalDateTime dataAbertura, LocalDateTime dataFechamento, Integer status,
-			Integer prioridade, String titulo, String modelo, String observacoes, Integer cliente, String nomeCliente, Integer tecnico,
+			Integer prioridade, String titulo, String modelo, String observacoes, String telefoneCliente, Integer cliente, String nomeCliente, Integer tecnico,
 			String nomeTecnico, List<Servico> servicos) {
 		super();
 		this.id = id;
@@ -61,6 +62,7 @@ public class ChamadoDto implements Serializable {
 		this.titulo = titulo;
 		this.modelo = modelo;
 		this.observacoes = observacoes;
+		this.telefoneCliente = telefoneCliente;
 		this.cliente = cliente;
 		this.nomeCliente = nomeCliente;
 		this.tecnico = tecnico;
@@ -78,6 +80,7 @@ public class ChamadoDto implements Serializable {
 		this.titulo = ch.getTitulo();
 		this.modelo = ch.getModelo();
 		this.observacoes = ch.getObservacoes();
+		this.telefoneCliente = ch.getCliente().getTelefone();
 		this.cliente = ch.getCliente().getId();
 		this.nomeCliente = ch.getCliente().getNome();
 		this.tecnico = ch.getTecnico().getId();
@@ -151,6 +154,14 @@ public class ChamadoDto implements Serializable {
 
 	public void setObservacoes(String observacoes) {
 		this.observacoes = observacoes;
+	}
+
+	public String getTelefoneCliente() {
+		return telefoneCliente;
+	}
+
+	public void setTelefoneCliente(String telefoneCliente) {
+		this.telefoneCliente = telefoneCliente;
 	}
 
 	public Integer getCliente() {
