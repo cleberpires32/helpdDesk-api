@@ -23,6 +23,11 @@ public interface PedidoEstoqueRepository extends JpaRepository<PedidoEstoque, In
 	@Query(value = "DELETE FROM PedidoEstoque p WHERE p.chamado.id = :chamadoId and p.itensEstoque.id IN :itensPedidos")
 	public void remover(@Param("chamadoId") Integer chamadoId, @Param("itensPedidos") Collection<Integer> itensPedidos);
 
+	
+	@Modifying
+	@Query(value = "SELECT p FROM PedidoEstoque p WHERE p.chamado = :chamadoId and p.itensEstoque IN :itensPedidos")
+	public List<PedidoEstoque> listaPedidoPorChamadoComItens(@Param("chamadoId") Chamado chamadoId, @Param("itensPedidos")  Collection<ItensEstoque> itensEstoque);
+	
 	@Modifying
 	@Query(value = "SELECT p FROM PedidoEstoque p WHERE p.itensEstoque.id IN :itensPedidos")
 	public List<PedidoEstoque> findByAllQuery(@Param("itensPedidos") Collection<Integer> itensPedidos);

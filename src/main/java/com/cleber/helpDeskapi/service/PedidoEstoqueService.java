@@ -30,6 +30,11 @@ public class PedidoEstoqueService {
 	public void saveAndFlush(PedidoEstoque pedido) {
 		repository.saveAndFlush(pedido);
 	}
+	
+	@Transactional
+	public void saveAllPedidos(List<PedidoEstoque> pedido) {
+		repository.saveAll(pedido);
+	}
 
 	@Transactional
 	public void delete(Integer chamadoId, Integer[] itensPedidos) {
