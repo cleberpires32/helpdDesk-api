@@ -90,7 +90,7 @@ public class ChamadoService {
 	private Chamado newChamado(ChamadoDto dto) {
 		Cliente cliente = clienteService.findById(dto.getCliente());
 		Tecnico tecnico = tecnicoService.findById(dto.getTecnico());
-		Optional<Chamado> ch = repository.findById(dto.getId());
+		Optional<Chamado> ch = dto.getId() != null? repository.findById(dto.getId()) : Optional.ofNullable(new Chamado());
 
 		if (dto.getStatus().equals(Status.ENCERRADO.getCodigo())) {
 			ch.get().setDataFechamento(LocalDateTime.now());
