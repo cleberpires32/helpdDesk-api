@@ -45,18 +45,16 @@ public class ClienteService {
 
 	private void validaPorCpfeEmail(ClienteDto clienteDto) {
 		Optional<Pessoa> pessoaComCpf = pessoaRepository.findByCpf(clienteDto.getCpf());
-
 		if (pessoaComCpf.isPresent() && pessoaComCpf.get().getId() != clienteDto.getId()) {
-
 			throw new DataIntegrityViolationException("CPF já cadastrado no sistema.");
 		}
-
-		Optional<Pessoa> pessoaComEmail = pessoaRepository.findByEmail(clienteDto.getEmail());
-
-		if (pessoaComEmail.isPresent() && pessoaComEmail.get().getId() != clienteDto.getId()) {
+//Cliente não precisa de validação de email
+		if (pessoaComCpf.isPresent() && 
+				pessoaComCpf.get().getEmail() == clienteDto.getEmail() && 
+						pessoaComCpf.get().getId() != clienteDto.getId()) {
 			throw new DataIntegrityViolationException("Email já cadastrado no sistema");
 		}
-
+		
 	}
 
 	public Cliente update(Integer id, ClienteDto objDto) {
