@@ -48,9 +48,13 @@ public class ChamadoService {
 
 	public ChamadoDto findById(Integer id) {
 		Optional<Chamado> op = repository.findById(id);
+		ChamadoDto dto = new ChamadoDto(op.get());
 		atualizarQtSolicitada(op);
 		op.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado com id: " + id));
-		return new ChamadoDto(op.get());
+		if (op.isPresent()) {
+			dto = new ChamadoDto(op.get());
+		}
+		return dto;
 	}
 
 	private void atualizarQtSolicitada(Optional<Chamado> op) {
@@ -72,15 +76,10 @@ public class ChamadoService {
 		Chamado c = new Chamado();
 		dto.setId(id);
 		findById(dto.getId());
-		Boolean existeCadastro = cadastroEstoqueOuServico(dto);
-		if (!existeCadastro) {
-			Chamado chamado = newChamado(dto);
-			c = repository.save(chamado);
-		} else {
-			new  DataIntegrityViolationException("Violação de dados");
-		}
+		Chamado chamado = newChamado(dto);
+		c = repository.save(chamado);
 		return new ChamadoDto(c);
-	}
+	}	
 
 	public ChamadoDto create(@Valid ChamadoDto dto) {
 		Chamado chamado = repository.save(newChamado(dto));
@@ -90,7 +89,8 @@ public class ChamadoService {
 	private Chamado newChamado(ChamadoDto dto) {
 		Cliente cliente = clienteService.findById(dto.getCliente());
 		Tecnico tecnico = tecnicoService.findById(dto.getTecnico());
-		Optional<Chamado> ch = dto.getId() != null? repository.findById(dto.getId()) : Optional.ofNullable(new Chamado());
+		Optional<Chamado> ch = dto.getId() != null ? repository.findById(dto.getId())
+				: Optional.ofNullable(new Chamado());
 
 		if (dto.getStatus().equals(Status.ENCERRADO.getCodigo())) {
 			ch.get().setDataFechamento(LocalDateTime.now());
@@ -127,7 +127,7 @@ public class ChamadoService {
 
 		if (dto.getId() != null) {
 			ch.setId(dto.getId());
-
+	
 			dto.getItensEstoque().stream().forEach(itendto -> {
 				pedido.setChamado(ch);
 				pedido.setItensEstoque(itendto);
@@ -137,7 +137,9 @@ public class ChamadoService {
 				// pedido.setPk(new PedidoEstoquePK());
 				pedidoEstoqueService.saveAndFlush(pedido);
 			});
-			alteraQuantidadeEstoque(dto);
+			if (dto.getAdicionarIteno()) {
+				alteraQuantidadeEstoque(dto);
+			}
 
 		}
 	}
@@ -171,15 +173,14 @@ public class ChamadoService {
 				listaQuantidadeAlterada.add(itensBd.get());
 			}
 		});
-		// itensEstoqueRepository.saveAll(listaQuantidadeAlterada);
 	}
 
 	public ChamadoDto updateServico(Integer id, List<ServicoDto> servicos) {
 		Optional<Chamado> ch = repository.findById(id);
-		List<Servico> servicosdb = servicos.stream().map(s -> new Servico(s)).collect(Collectors.toList()); 
+		List<Servico> servicosdb = servicos.stream().map(s -> new Servico(s)).collect(Collectors.toList());
 		ch.get().getServicos().removeAll(servicosdb);
-		
-		repository.save(ch.get()); 
+
+		repository.save(ch.get());
 		return new ChamadoDto(ch.get());
 	}
 

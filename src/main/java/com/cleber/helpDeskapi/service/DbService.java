@@ -41,7 +41,7 @@ public class DbService {
 	public void instaciaDbService() {
 		Tecnico tc0 = new Tecnico(null, "talis", "talis@gmail.com", "78882720020", "61991587610" ,encode.encode("123"));
 		tc0.addPerfil(Perfil.ADMIN);
-		/*
+		
 		Tecnico tc1 = new Tecnico(null, "cleber", "cleber@gmail.com", "11683800060", "61991587610" ,encode.encode("#Rebelc32"));
 		tc1.addPerfil(Perfil.ADMIN);
 		
@@ -62,16 +62,16 @@ public class DbService {
 		
 		itensEstoqueRepository.saveAll(Arrays.asList(est,est2));
 		tecnicoRepository.saveAll(Arrays.asList(tc0,tc1,tc2,tc3,tc4));
-		*/
+		
 		tecnicoRepository.saveAll(Arrays.asList(tc0));
-		/*
+		
 		clienteRepository.saveAll(Arrays.asList(cl1,cl2));
 		chamadoRepository.saveAll(Arrays.asList(ch1,ch2,ch3,ch4));
 		
 		Servico s1 = new Servico(null,"Limpleza e regulagem do carburador", BigDecimal.TEN);
 		Servico s2 = new Servico(null,"Mão de Obra Geral", BigDecimal.TEN);
 		servicoRepository.saveAll(Arrays.asList(s1,s2));
-		*/
+		
 		
 	}
 	

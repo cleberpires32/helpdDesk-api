@@ -47,6 +47,7 @@ public class ChamadoDto implements Serializable {
 	private String nomeTecnico;
 	private Set<ItensEstoque> itensEstoque = new HashSet<>();
 	private List<Servico> servicos = new ArrayList<>();
+	private boolean adicionarIten;
 
 	public ChamadoDto() {
 		super();
@@ -54,7 +55,7 @@ public class ChamadoDto implements Serializable {
 
 	public ChamadoDto(Integer id, LocalDateTime dataAbertura, LocalDateTime dataFechamento, Integer status,
 			Integer prioridade, String titulo, String modelo,String recibo,  String observacoes, String telefoneCliente, Integer cliente, String nomeCliente, Integer tecnico,
-			String nomeTecnico, List<Servico> servicos) {
+			String nomeTecnico, List<Servico> servicos, boolean adicionarIten) {
 		super();
 		this.id = id;
 		this.dataAbertura = dataAbertura;
@@ -71,6 +72,7 @@ public class ChamadoDto implements Serializable {
 		this.tecnico = tecnico;
 		this.nomeTecnico = nomeTecnico;
 		this.servicos.addAll(servicos);
+		this.adicionarIten = adicionarIten;
 	}
 
 	public ChamadoDto(Chamado ch) {
@@ -222,6 +224,14 @@ public class ChamadoDto implements Serializable {
 
 	public void setServicos(List<Servico> servicos) {
 		this.servicos = servicos;
+	}
+
+	public Boolean getAdicionarIteno() {
+		return adicionarIten;
+	}
+
+	public void setAdicionarIten(Boolean adicionarIten) {
+		this.adicionarIten = adicionarIten;
 	}
 
 }
