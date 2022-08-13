@@ -40,9 +40,9 @@ public class DbService {
 	
 	public void instaciaDbService() {
 		Tecnico tc0 = new Tecnico(null, "talis", "talis@gmail.com", "78882720020", "61991587610" ,encode.encode("123"));
-		/*
-		tc0.addPerfil(Perfil.ADMIN);
 		
+		tc0.addPerfil(Perfil.ADMIN);
+		/*
 		Tecnico tc1 = new Tecnico(null, "cleber", "cleber@gmail.com", "11683800060", "61991587610" ,encode.encode("#Rebelc32"));
 		tc1.addPerfil(Perfil.ADMIN);
 		
