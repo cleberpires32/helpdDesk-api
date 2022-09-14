@@ -22,6 +22,7 @@ import javax.persistence.OneToMany;
 
 import com.cleber.helpDeskapi.domain.enums.Prioridade;
 import com.cleber.helpDeskapi.domain.enums.Status;
+import com.cleber.helpDeskapi.dtos.ChamadoDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
@@ -72,6 +73,15 @@ public class Chamado implements Serializable{
 		this.prioridade = prioridade;
 		this.tecnico = tecnico;
 		this.cliente = cliente;
+	}
+	
+	public Chamado(ChamadoDto dto) {
+
+		this.id = dto.getId();
+		this.titulo = dto.getTitulo();
+		this.modelo = dto.getModelo();
+		this.recibo = dto.getRecibo();
+		this.observacoes = dto.getObservacoes();
 	}
 	
 	public Integer getId() {

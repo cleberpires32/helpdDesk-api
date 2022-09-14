@@ -1,6 +1,8 @@
 package com.cleber.helpDeskapi.domain.enums;
 
-public enum Status {
+import java.io.Serializable;
+
+public enum Status implements Serializable{
 
 	ABERTO(0, "ABERTO"), ANDAMENTO(1, "ANDAMENTO"), CANCELADO(2, "CANCELADO"), ENCERRADO(3, "ENCERRADO");
 
