@@ -26,6 +26,9 @@ public class ChamadoDto implements Serializable {
 	@JsonIgnore
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDateTime dataFechamento;
+	@JsonIgnore
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	private LocalDateTime dataEntrega;
 	@NotNull(message = "O campo Status é requerido")
 	private Integer status;
 	@NotNull(message = "O campo Prioridade é requerido")
@@ -53,13 +56,14 @@ public class ChamadoDto implements Serializable {
 		super();
 	}
 
-	public ChamadoDto(Integer id, LocalDateTime dataAbertura, LocalDateTime dataFechamento, Integer status,
+	public ChamadoDto(Integer id, LocalDateTime dataAbertura, LocalDateTime dataFechamento, LocalDateTime dataEntrega,Integer status,
 			Integer prioridade, String titulo, String modelo,String recibo,  String observacoes, String telefoneCliente, Integer cliente, String nomeCliente, Integer tecnico,
 			String nomeTecnico, List<Servico> servicos, boolean adicionarIten) {
 		super();
 		this.id = id;
 		this.dataAbertura = dataAbertura;
 		this.dataFechamento = dataFechamento;
+		this.dataEntrega = dataEntrega;
 		this.status = status;
 		this.prioridade = prioridade;
 		this.titulo = titulo;
@@ -80,6 +84,7 @@ public class ChamadoDto implements Serializable {
 		this.id = ch.getId();
 		this.dataAbertura = ch.getDataAbertura();
 		this.dataFechamento = ch.getDataFechamento();
+		this.dataEntrega = ch.getDataEntrega();
 		this.status = ch.getStatus().getCodigo();
 		this.prioridade = ch.getPrioridade().getCodigo();
 		this.titulo = ch.getTitulo();
@@ -122,6 +127,13 @@ public class ChamadoDto implements Serializable {
 		this.dataFechamento = dataFechamento;
 	}
 
+	public LocalDateTime getDataEntrega() {
+		return dataEntrega;
+	}
+
+	public void setDataEntrega(LocalDateTime dataEntrega) {
+		this.dataEntrega = dataEntrega;
+	}
 	public Integer getStatus() {
 		return status;
 	}

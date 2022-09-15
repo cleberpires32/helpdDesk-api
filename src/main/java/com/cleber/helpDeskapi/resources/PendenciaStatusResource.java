@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.cleber.helpDeskapi.domain.PendenciaStatus;
+import com.cleber.helpDeskapi.dtos.EncerraChamadoDto;
 import com.cleber.helpDeskapi.dtos.PendenciaStatusDto;
 import com.cleber.helpDeskapi.service.PendenciaStatusService;
 
@@ -56,5 +57,11 @@ public class PendenciaStatusResource {
 	public ResponseEntity<Void> delete(@PathVariable Long idPendencia){
 		service.remmove(idPendencia);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@PostMapping("/encerraChamado")
+	public ResponseEntity<EncerraChamadoDto> finalizachamado(@RequestBody EncerraChamadoDto dto){
+		service.finalizaChamado(dto);
+		return null;
 	}
 }
