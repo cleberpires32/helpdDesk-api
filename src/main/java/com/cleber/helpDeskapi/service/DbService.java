@@ -64,6 +64,7 @@ public class DbService {
 		itensEstoqueRepository.saveAll(Arrays.asList(est,est2));
 		tecnicoRepository.saveAll(Arrays.asList(tc0,tc1,tc2,tc3,tc4));
 		*/
+		
 		tecnicoRepository.saveAll(Arrays.asList(tc0,tc1));
 		/*
 		clienteRepository.saveAll(Arrays.asList(cl1,cl2));
