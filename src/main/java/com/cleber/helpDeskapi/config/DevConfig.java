@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Profile;
 import com.cleber.helpDeskapi.service.DbService;
 
 @Configuration
-@Profile("prod")
+@Profile("dev")
 public class DevConfig {
 
 	@Autowired
