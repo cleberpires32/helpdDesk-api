@@ -2,6 +2,9 @@ package com.cleber.helpDeskapi.dtos;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -34,6 +37,10 @@ public class ServicoDto implements Serializable {
 		this.descricao = servico.getDescricao();
 		this.valor = servico.getValor();
 	}
+	
+    public static List<ServicoDto> converterToList(List<Servico> servicos) {
+        return servicos.stream().map(ServicoDto::new).collect(Collectors.toList());
+    }
 
 	public Integer getId() {
 		return id;

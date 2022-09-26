@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cleber.helpDeskapi.comm.ModelMapperServicoDto;
 import com.cleber.helpDeskapi.domain.Chamado;
 import com.cleber.helpDeskapi.domain.Cliente;
 import com.cleber.helpDeskapi.domain.ItensEstoque;
@@ -25,7 +26,7 @@ import com.cleber.helpDeskapi.dtos.ServicoDto;
 import com.cleber.helpDeskapi.repository.ChamadoRepository;
 import com.cleber.helpDeskapi.repository.ItensEstoqueRepository;
 import com.cleber.helpDeskapi.repository.PedidoEstoqueRepository;
-import com.cleber.helpDeskapi.service.exception.DataIntegrityViolationException;
+import com.cleber.helpDeskapi.repository.ServicoRepository;
 import com.cleber.helpDeskapi.service.exception.ObjectNotFoundException;
 
 @Service
@@ -45,6 +46,8 @@ public class ChamadoService {
 	private ChamadoRepository repository;
 	@Autowired
 	private ItensEstoqueRepository itensEstoqueRepository;
+	@Autowired
+	private ModelMapperServicoDto modelMapperServicoDto;
 
 	public ChamadoDto findById(Integer id) {
 		Optional<Chamado> op = repository.findById(id);
@@ -95,21 +98,41 @@ public class ChamadoService {
 		if (dto.getStatus().equals(Status.ENCERRADO.getCodigo())) {
 			ch.get().setDataFechamento(LocalDateTime.now());
 		}
-
-		ch.get().setStatus(Status.toEnum(dto.getStatus()));
-		ch.get().setPrioridade(Prioridade.toEnum(dto.getPrioridade()));
-		ch.get().setTitulo(dto.getTitulo());
-		ch.get().setModelo(dto.getModelo());
-		ch.get().setRecibo(dto.getRecibo());
-		ch.get().setObservacoes(dto.getObservacoes());
-		ch.get().setCliente(cliente);
-		ch.get().setTecnico(tecnico);
-		ch.get().setServicos(dto.getServicos().size() == 0 ? ch.get().getServicos()
-				: getServicos(ch.get().getServicos(), dto.getServicos()));
+		
+		recusaAndamentoOsm(dto);
+	
+			ch.get().setStatus(Status.toEnum(dto.getStatus()));
+			ch.get().setPrioridade(Prioridade.toEnum(dto.getPrioridade()));
+			ch.get().setTitulo(dto.getTitulo());
+			ch.get().setModelo(dto.getModelo());
+			ch.get().setRecibo(dto.getRecibo());
+			ch.get().setObservacoes(dto.getObservacoes());
+			ch.get().setCliente(cliente);
+			ch.get().setTecnico(tecnico);
+			ch.get().setServicos(dto.getServicos().size() == 0 ? ch.get().getServicos()
+					: getServicos(ch.get().getServicos(), dto.getServicos()));
 
 		toUpdate(dto, ch.get());
 
 		return ch.get();
+	}
+
+	private void recusaAndamentoOsm(ChamadoDto dto) {
+		Integer[] itensEstoqueId = new Integer [dto.getItensEstoque().size()];
+		findById(dto.getId());
+		int count = 0;
+
+		if(dto.getStatus().equals(Status.CANCELADO.getCodigo()) &&  dto.getItensEstoque() != null) {
+			for (ItensEstoque element : dto.getItensEstoque()) {
+				itensEstoqueId[count] = element.getId();
+				count++;
+			}
+			pedidoEstoqueService.delete(dto.getId(), itensEstoqueId);
+			//apaga os serviços da osm tambpem
+			List<ServicoDto> l = ServicoDto.converterToList(dto.getServicos());
+			dto.setServicos(updateServico(dto.getId(), l).getServicos());
+		}
+		
 	}
 
 	private List<Servico> getServicos(List<Servico> bd, List<Servico> dto) {
@@ -175,6 +198,7 @@ public class ChamadoService {
 		});
 	}
 
+	@Transactional
 	public ChamadoDto updateServico(Integer id, List<ServicoDto> servicos) {
 		Optional<Chamado> ch = repository.findById(id);
 		List<Servico> servicosdb = servicos.stream().map(s -> new Servico(s)).collect(Collectors.toList());
