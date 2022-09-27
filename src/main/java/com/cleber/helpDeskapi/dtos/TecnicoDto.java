@@ -22,7 +22,7 @@ public class TecnicoDto implements Serializable{
 	@NotNull
 	protected String nome;
 	protected String email;
-	@NotNull
+	//@NotNull
 	protected String cpf;
 	protected String telefone;
 	protected String senha;
