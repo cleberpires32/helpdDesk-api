@@ -98,8 +98,9 @@ public class ChamadoService {
 		if (dto.getStatus().equals(Status.ENCERRADO.getCodigo())) {
 			ch.get().setDataFechamento(LocalDateTime.now());
 		}
-		
-		recusaAndamentoOsm(dto);
+		if(dto.getStatus().equals(Status.CANCELADO.getCodigo())) {
+			recusaAndamentoOsm(dto);
+		}
 	
 			ch.get().setStatus(Status.toEnum(dto.getStatus()));
 			ch.get().setPrioridade(Prioridade.toEnum(dto.getPrioridade()));
@@ -122,7 +123,7 @@ public class ChamadoService {
 		findById(dto.getId());
 		int count = 0;
 
-		if(dto.getStatus().equals(Status.CANCELADO.getCodigo()) &&  dto.getItensEstoque() != null) {
+		if(dto.getItensEstoque() != null) {
 			for (ItensEstoque element : dto.getItensEstoque()) {
 				itensEstoqueId[count] = element.getId();
 				count++;
