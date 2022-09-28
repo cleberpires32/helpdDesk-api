@@ -118,7 +118,7 @@ public abstract class Pessoa implements Serializable{
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(cpf, id);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -130,7 +130,7 @@ public abstract class Pessoa implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Pessoa other = (Pessoa) obj;
-		return Objects.equals(cpf, other.cpf) && Objects.equals(id, other.id);
+		return Objects.equals(id, other.id);
 	}
 	
 	

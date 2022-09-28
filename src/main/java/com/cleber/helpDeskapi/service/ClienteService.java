@@ -37,10 +37,19 @@ public class ClienteService {
 
 	public Cliente create(ClienteDto clienteDto) {
 		clienteDto.setId(null);
-		validaPorCpfeEmail(clienteDto);
+		if (cpfIsPresent(clienteDto.getCpf())) {
+			validaPorCpfeEmail(clienteDto);
+		}
 		clienteDto.setSenha(encoder.encode(clienteDto.getSenha()));
 		Cliente cliente = new Cliente(clienteDto);
 		return ClienteRepository.save(cliente);
+	}
+	
+	private boolean cpfIsPresent(String cpf) {
+		if(cpf == "" || cpf == null) {
+			return false;
+		}
+		return true;
 	}
 
 	private void validaPorCpfeEmail(ClienteDto clienteDto) {
